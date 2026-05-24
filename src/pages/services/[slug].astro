@@ -1,0 +1,156 @@
+---
+import MarketingLayout from "../../layouts/MarketingLayout.astro";
+
+const { slug = "service" } = Astro.params;
+
+const serviceName = slug
+  .split("-")
+  .filter(Boolean)
+  .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+  .join(" ");
+
+const servicePoints = [
+  "Analyse du support et des contraintes de pose",
+  "Preparation du vitrage adapte a l'usage et aux dimensions",
+  "Finition propre pour un rendu net et durable"
+] as const;
+
+const serviceBenefits = [
+  {
+    title: "Pose maitrisee",
+    description: "Des alignements propres, des appuis soignes et une lecture visuelle plus nette du projet."
+  },
+  {
+    title: "Choix du vitrage",
+    description: "Le bon niveau d'isolation, de securite ou de transparence selon l'usage attendu."
+  },
+  {
+    title: "Rendu professionnel",
+    description: "Une intervention pensee pour la durabilite, la proprete du chantier et la tenue dans le temps."
+  }
+] as const;
+---
+
+<MarketingLayout
+  title={`${serviceName} | Univers Glass`}
+  description={`Presentation du service ${serviceName} pour vitrerie professionnelle.`}
+>
+  <main class="page-shell service-page">
+    <section class="service-hero">
+      <div class="service-hero__copy">
+        <p class="eyebrow">Service vitrerie</p>
+        <h1>{serviceName || "Service"} avec une execution propre et serieuse.</h1>
+        <p>
+          Cette page peut servir de point d'entree SEO ou commercial pour
+          presenter un service precis avec un discours plus metier, plus clair
+          et mieux cadre pour la prise de contact.
+        </p>
+
+        <div class="actions">
+          <a class="button-link" href="/devis">Demander un devis</a>
+          <a class="button-link button-link--secondary" href="/intervention-rapide">Voir l'intervention rapide</a>
+        </div>
+      </div>
+
+      <aside class="service-hero__panel">
+        <p class="eyebrow">Point de controle</p>
+        <ul>
+          {servicePoints.map((item) => <li>{item}</li>)}
+        </ul>
+      </aside>
+    </section>
+
+    <section class="service-grid">
+      {
+        serviceBenefits.map((item) => (
+          <article class="page-card service-card">
+            <h2>{item.title}</h2>
+            <p>{item.description}</p>
+          </article>
+        ))
+      }
+    </section>
+  </main>
+
+  <style>
+    .service-page {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .service-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(17rem, 0.88fr);
+      gap: 1rem;
+    }
+
+    .service-hero__copy,
+    .service-hero__panel {
+      padding: clamp(1.3rem, 2.7vw, 1.95rem);
+      border-radius: 1.5rem;
+    }
+
+    .service-hero__copy {
+      background:
+        radial-gradient(circle at top left, rgba(35, 111, 210, 0.16), rgba(35, 111, 210, 0) 28%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(247, 251, 255, 0.96) 100%);
+      border: 1px solid rgba(203, 218, 236, 0.82);
+      box-shadow: 0 22px 50px rgba(16, 49, 93, 0.08);
+    }
+
+    .service-hero__copy p {
+      max-width: 40rem;
+    }
+
+    .service-hero__panel {
+      background: linear-gradient(145deg, #103a73 0%, #1459ad 100%);
+      box-shadow: 0 24px 54px rgba(16, 49, 93, 0.16);
+    }
+
+    .service-hero__panel .eyebrow {
+      color: rgba(255, 255, 255, 0.72);
+      margin-bottom: 1rem;
+    }
+
+    .service-hero__panel ul {
+      margin: 0;
+      padding-left: 1.15rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .service-hero__panel li {
+      color: rgba(255, 255, 255, 0.84);
+      line-height: 1.65;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .service-card {
+      display: grid;
+      gap: 0.8rem;
+      align-content: start;
+    }
+
+    .service-card h2 {
+      margin: 0;
+      color: #0f2f57;
+      font-size: 1.1rem;
+    }
+
+    .service-card p {
+      margin: 0;
+    }
+
+    @media (max-width: 920px) {
+      .service-hero,
+      .service-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</MarketingLayout>

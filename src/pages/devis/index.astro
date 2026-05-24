@@ -1,0 +1,672 @@
+---
+import MarketingLayout from "../../layouts/MarketingLayout.astro";
+import MarketingIcon from "../../components/ui/MarketingIcon.astro";
+
+const apiBaseUrl = import.meta.env.PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000/api";
+
+const quoteBenefits = [
+  {
+    icon: "glass",
+    title: "Vitrage adapte",
+    description: "Choisissez le bon type de vitrage selon l'usage, le rendu et la surface a traiter."
+  },
+  {
+    icon: "thermo",
+    title: "Lecture technique",
+    description: "L'estimation prend en compte les options, l'epaisseur et la nature de la prestation."
+  },
+  {
+    icon: "repair",
+    title: "Suite exploitable",
+    description: "Le resultat sert de base claire pour avancer rapidement sur une demande serieuse."
+  }
+] as const;
+
+const quoteChecklist = [
+  "Largeur et hauteur utiles de l'ouverture",
+  "Type de vitrage souhaite ou niveau de performance vise",
+  "Nature exacte de la pose ou du remplacement"
+] as const;
+---
+
+<MarketingLayout
+  title="Demande de devis"
+  description="Calculez un devis vitrerie relie au backend."
+>
+  <main class="page-shell">
+    <section class="quote-page" data-api-base={apiBaseUrl}>
+      <section class="quote-hero">
+        <div class="quote-hero__copy">
+          <p class="eyebrow">Demande de devis</p>
+          <h1>Calculez une estimation claire pour votre projet vitrerie.</h1>
+          <p>
+            Cette page relie maintenant les configurations, les prestations et
+            le calcul du prix au backend. Vous gardez un parcours simple, mais
+            avec une lecture beaucoup plus propre du besoin.
+          </p>
+
+          <div class="actions">
+            <a class="button-link" href="/intervention-rapide">Besoin d'une urgence</a>
+            <a class="button-link button-link--secondary" href="/">Retour a l'accueil</a>
+          </div>
+        </div>
+
+        <aside class="quote-hero__panel">
+          <p class="eyebrow">Avant de commencer</p>
+          <ul class="quote-hero__list">
+            {quoteChecklist.map((item) => <li>{item}</li>)}
+          </ul>
+          <span class="quote-hero__badge">Estimation structuree et rapide</span>
+        </aside>
+      </section>
+
+      <section class="quote-benefits">
+        {
+          quoteBenefits.map((item) => (
+            <article class="page-card quote-benefit">
+              <span class="quote-benefit__icon">
+                <MarketingIcon name={item.icon} />
+              </span>
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
+            </article>
+          ))
+        }
+      </section>
+
+      <div class="quote-layout">
+        <section class="page-card quote-form-card">
+          <div class="quote-panel__intro">
+            <p class="eyebrow">Configuration</p>
+            <h2>Renseignez les caracteristiques du vitrage.</h2>
+            <p>
+              Selectionnez le vitrage, l'epaisseur, la prestation et les options
+              pour lancer une estimation propre.
+            </p>
+          </div>
+
+          <div class="quote-status" data-role="status">Chargement de la configuration...</div>
+
+          <form class="quote-form" data-role="form">
+            <div class="form-grid">
+              <label class="field">
+                <span>Largeur (cm)</span>
+                <input name="width" type="number" min="1" step="0.01" value="120" required />
+              </label>
+
+              <label class="field">
+                <span>Hauteur (cm)</span>
+                <input name="height" type="number" min="1" step="0.01" value="150" required />
+              </label>
+
+              <label class="field">
+                <span>Type de vitrage</span>
+                <select name="glass_type" data-role="glass-type" required disabled>
+                  <option>Chargement...</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Epaisseur</span>
+                <select name="thickness" data-role="thickness" required disabled>
+                  <option>Chargement...</option>
+                </select>
+              </label>
+
+              <label class="field field--wide">
+                <span>Type de prestation</span>
+                <select name="work_type" data-role="work-type" required disabled>
+                  <option>Chargement...</option>
+                </select>
+              </label>
+            </div>
+
+            <fieldset class="options" data-role="options-group" disabled>
+              <legend>Options</legend>
+              <div class="options__grid" data-role="options"></div>
+            </fieldset>
+
+            <div class="form-actions">
+              <button class="button-link" type="submit" data-role="submit" disabled>
+                Calculer le devis
+              </button>
+              <a class="button-link button-link--secondary" href="/">Retour a l'accueil</a>
+            </div>
+          </form>
+        </section>
+
+        <aside class="page-card quote-result-card">
+          <div class="quote-panel__intro">
+            <p class="eyebrow">Resultat</p>
+            <h2>Votre estimation apparait ici.</h2>
+            <p>
+              Le detail du cout s'affiche apres calcul avec une lecture simple
+              de la surface, du vitrage, de la main d'oeuvre et des options.
+            </p>
+          </div>
+
+          <div class="result-empty" data-role="placeholder">
+            Lancez un calcul pour afficher le prix estime et le detail du devis.
+          </div>
+
+          <div class="result-panel" data-role="result" hidden>
+            <div class="result-total">
+              <span>Total estime</span>
+              <strong data-role="total-price">-</strong>
+            </div>
+
+            <div class="result-summary">
+              <div>
+                <span>Surface</span>
+                <strong data-role="area">-</strong>
+              </div>
+              <div>
+                <span>Vitrage</span>
+                <strong data-role="glass-cost">-</strong>
+              </div>
+              <div>
+                <span>Main d'oeuvre</span>
+                <strong data-role="work-cost">-</strong>
+              </div>
+              <div>
+                <span>Options</span>
+                <strong data-role="options-cost">-</strong>
+              </div>
+            </div>
+
+            <div class="result-breakdown">
+              <p class="eyebrow">Detail</p>
+              <ul class="simple-list" data-role="breakdown"></ul>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    (() => {
+      const root = document.querySelector(".quote-page");
+      if (!root) return;
+
+      const apiBase = root.dataset.apiBase?.replace(/\/$/, "") || "";
+      const status = root.querySelector('[data-role="status"]');
+      const form = root.querySelector('[data-role="form"]');
+      const submitButton = root.querySelector('[data-role="submit"]');
+      const glassTypeSelect = root.querySelector('[data-role="glass-type"]');
+      const thicknessSelect = root.querySelector('[data-role="thickness"]');
+      const workTypeSelect = root.querySelector('[data-role="work-type"]');
+      const optionsWrapper = root.querySelector('[data-role="options"]');
+      const optionsGroup = root.querySelector('[data-role="options-group"]');
+      const placeholder = root.querySelector('[data-role="placeholder"]');
+      const resultPanel = root.querySelector('[data-role="result"]');
+      const totalPrice = root.querySelector('[data-role="total-price"]');
+      const area = root.querySelector('[data-role="area"]');
+      const glassCost = root.querySelector('[data-role="glass-cost"]');
+      const workCost = root.querySelector('[data-role="work-cost"]');
+      const optionsCost = root.querySelector('[data-role="options-cost"]');
+      const breakdown = root.querySelector('[data-role="breakdown"]');
+
+      const setStatus = (message, type = "info") => {
+        if (!status) return;
+        status.textContent = message;
+        status.dataset.state = type;
+      };
+
+      const clearSelect = (select, placeholderText) => {
+        if (!select) return;
+        select.innerHTML = "";
+        const option = document.createElement("option");
+        option.value = "";
+        option.textContent = placeholderText;
+        select.appendChild(option);
+      };
+
+      const money = (value, currency) => {
+        const amount = Number.parseFloat(value);
+        if (Number.isNaN(amount)) return `${value} ${currency}`;
+        return `${amount.toLocaleString("fr-FR", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        })} ${currency}`;
+      };
+
+      const renderConfig = (config) => {
+        clearSelect(glassTypeSelect, "Choisir un vitrage");
+        clearSelect(thicknessSelect, "Choisir une epaisseur");
+        clearSelect(workTypeSelect, "Choisir une prestation");
+
+        config.glass_types.forEach((item) => {
+          const option = document.createElement("option");
+          option.value = item.id;
+          option.textContent = `${item.name} (${money(item.price_per_m2, config.currency)}/m2)`;
+          glassTypeSelect.appendChild(option);
+        });
+
+        config.thicknesses.forEach((item) => {
+          const option = document.createElement("option");
+          option.value = item.value;
+          option.textContent = item.label;
+          thicknessSelect.appendChild(option);
+        });
+
+        config.work_types.forEach((item) => {
+          const option = document.createElement("option");
+          option.value = item.id;
+          option.textContent = `${item.name} (${money(item.price, config.currency)})`;
+          workTypeSelect.appendChild(option);
+        });
+
+        optionsWrapper.innerHTML = "";
+        config.options.forEach((item) => {
+          const label = document.createElement("label");
+          label.className = "option-item";
+
+          const input = document.createElement("input");
+          input.type = "checkbox";
+          input.name = "options";
+          input.value = String(item.id);
+
+          const text = document.createElement("span");
+          text.textContent = `${item.name} (${money(item.price, config.currency)})`;
+
+          label.append(input, text);
+          optionsWrapper.appendChild(label);
+        });
+
+        glassTypeSelect.disabled = false;
+        thicknessSelect.disabled = false;
+        workTypeSelect.disabled = false;
+        optionsGroup.disabled = false;
+        submitButton.disabled = false;
+        setStatus("Configuration chargee. Vous pouvez calculer un devis.", "success");
+      };
+
+      const renderResult = (result) => {
+        placeholder.hidden = true;
+        resultPanel.hidden = false;
+        totalPrice.textContent = money(result.total_price, result.currency);
+        area.textContent = `${result.area} m2`;
+        glassCost.textContent = money(result.glass_cost, result.currency);
+        workCost.textContent = money(result.work_cost, result.currency);
+        optionsCost.textContent = money(result.options_cost, result.currency);
+        breakdown.innerHTML = "";
+
+        result.details.breakdown.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = `${item.label}: ${money(item.amount, result.currency)}`;
+          breakdown.appendChild(li);
+        });
+      };
+
+      const loadConfig = async () => {
+        try {
+          setStatus("Chargement de la configuration...", "info");
+          const response = await fetch(`${apiBase}/config/`);
+          if (!response.ok) throw new Error(`Erreur ${response.status}`);
+          const config = await response.json();
+          renderConfig(config);
+        } catch (error) {
+          console.error(error);
+          setStatus("Impossible de charger le backend. Verifiez que Django tourne sur le port 8000.", "error");
+        }
+      };
+
+      form?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        submitButton.disabled = true;
+        setStatus("Calcul du devis en cours...", "info");
+
+        const formData = new FormData(form);
+        const payload = {
+          width: formData.get("width"),
+          height: formData.get("height"),
+          glass_type: Number(formData.get("glass_type")),
+          thickness: Number(formData.get("thickness")),
+          work_type: Number(formData.get("work_type")),
+          options: formData.getAll("options").map((value) => Number(value)),
+          holes: []
+        };
+
+        try {
+          const response = await fetch(`${apiBase}/quote/`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+          });
+
+          const data = await response.json();
+          if (!response.ok) {
+            const firstError = JSON.stringify(data);
+            throw new Error(firstError);
+          }
+
+          renderResult(data);
+          setStatus("Devis calcule avec succes.", "success");
+        } catch (error) {
+          console.error(error);
+          setStatus("Le calcul a echoue. Verifiez les champs ou la disponibilite du backend.", "error");
+        } finally {
+          submitButton.disabled = false;
+        }
+      });
+
+      loadConfig();
+    })();
+  </script>
+
+  <style>
+    .quote-page {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .quote-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(18rem, 0.88fr);
+      gap: 1rem;
+    }
+
+    .quote-hero__copy,
+    .quote-hero__panel {
+      padding: clamp(1.3rem, 2.8vw, 1.95rem);
+      border-radius: 1.55rem;
+    }
+
+    .quote-hero__copy {
+      background:
+        radial-gradient(circle at top left, rgba(35, 111, 210, 0.16), rgba(35, 111, 210, 0) 28%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(247, 251, 255, 0.96) 100%);
+      border: 1px solid rgba(203, 218, 236, 0.82);
+      box-shadow: 0 22px 50px rgba(16, 49, 93, 0.08);
+    }
+
+    .quote-hero__copy p {
+      max-width: 39rem;
+    }
+
+    .quote-hero__panel {
+      background: linear-gradient(145deg, #103a73 0%, #1459ad 100%);
+      box-shadow: 0 24px 54px rgba(16, 49, 93, 0.16);
+    }
+
+    .quote-hero__panel .eyebrow {
+      color: rgba(255, 255, 255, 0.72);
+      margin-bottom: 1rem;
+    }
+
+    .quote-hero__list {
+      margin: 0;
+      padding-left: 1.15rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .quote-hero__list li {
+      color: rgba(255, 255, 255, 0.84);
+      line-height: 1.65;
+    }
+
+    .quote-hero__badge {
+      width: fit-content;
+      margin-top: 1rem;
+      padding: 0.58rem 0.84rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .quote-benefits {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .quote-benefit {
+      display: grid;
+      gap: 0.8rem;
+      align-content: start;
+    }
+
+    .quote-benefit__icon {
+      width: 3rem;
+      height: 3rem;
+      display: grid;
+      place-items: center;
+      border-radius: 1rem;
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .quote-benefit h2,
+    .quote-panel__intro h2 {
+      margin: 0;
+      color: #0f2f57;
+      letter-spacing: -0.03em;
+    }
+
+    .quote-benefit h2 {
+      font-size: 1.08rem;
+    }
+
+    .quote-benefit p,
+    .quote-panel__intro p {
+      margin: 0;
+    }
+
+    .quote-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(20rem, 0.82fr);
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .quote-form-card,
+    .quote-result-card {
+      display: grid;
+      gap: 1rem;
+      align-content: start;
+      border-radius: 1.55rem;
+    }
+
+    .quote-result-card {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .quote-panel__intro {
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .quote-panel__intro h2 {
+      font-size: clamp(1.4rem, 2.4vw, 2rem);
+    }
+
+    .quote-status {
+      padding: 0.95rem 1rem;
+      border-radius: 1rem;
+      font-weight: 700;
+      background: rgba(15, 47, 87, 0.06);
+      color: #33506d;
+    }
+
+    .quote-status[data-state="success"] {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .quote-status[data-state="error"] {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .quote-form {
+      display: grid;
+      gap: 1.1rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.95rem;
+    }
+
+    .field {
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .field--wide {
+      grid-column: 1 / -1;
+    }
+
+    .field span,
+    .options legend {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .field input,
+    .field select {
+      min-height: 3.05rem;
+      padding: 0.78rem 0.9rem;
+      border: 1px solid #cbdaec;
+      border-radius: 1rem;
+      font: inherit;
+      background: rgba(255, 255, 255, 0.92);
+      color: #0f2f57;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    }
+
+    .field input:focus,
+    .field select:focus {
+      outline: 2px solid rgba(35, 111, 210, 0.16);
+      outline-offset: 1px;
+      border-color: rgba(21, 95, 188, 0.5);
+    }
+
+    .options {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid #d9e7f2;
+      border-radius: 1.1rem;
+      background: rgba(244, 248, 253, 0.92);
+    }
+
+    .options__grid {
+      display: grid;
+      gap: 0.7rem;
+      margin-top: 0.75rem;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      color: #334155;
+      font-weight: 600;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .result-empty {
+      padding: 1rem;
+      border-radius: 1.05rem;
+      background: rgba(244, 248, 253, 0.92);
+      color: #4f6988;
+      line-height: 1.6;
+    }
+
+    .result-panel {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .result-total {
+      display: grid;
+      gap: 0.35rem;
+      padding: 1.1rem;
+      border-radius: 1.15rem;
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      color: #1d4ed8;
+    }
+
+    .result-total span {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .result-total strong {
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .result-summary {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .result-summary div {
+      padding: 0.95rem;
+      border-radius: 1rem;
+      background: rgba(244, 248, 253, 0.92);
+    }
+
+    .result-summary span {
+      display: block;
+      margin-bottom: 0.3rem;
+      color: #64748b;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .result-summary strong {
+      color: #0f172a;
+      font-size: 1rem;
+    }
+
+    .result-breakdown .simple-list {
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .quote-hero,
+      .quote-benefits,
+      .quote-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .quote-result-card {
+        position: static;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .form-grid,
+      .result-summary {
+        grid-template-columns: 1fr;
+      }
+
+      .form-actions {
+        display: grid;
+      }
+    }
+  </style>
+</MarketingLayout>

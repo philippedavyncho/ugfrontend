@@ -1,0 +1,449 @@
+---
+import MarketingLayout from "../layouts/MarketingLayout.astro";
+import MarketingIcon from "../components/ui/MarketingIcon.astro";
+
+const emergencyCases = [
+  {
+    icon: "repair",
+    title: "Bris de glace",
+    description:
+      "Fenetre fissuree, vitrage casse ou baie endommagee: nous organisons une intervention rapide pour remettre les lieux en etat."
+  },
+  {
+    icon: "shield",
+    title: "Mise en securite",
+    description:
+      "Protection provisoire, fermeture de zone et remise en protection des acces pour limiter les risques et les intrusions."
+  },
+  {
+    icon: "glass",
+    title: "Vitrine et facade",
+    description:
+      "Commerce, hall ou facade vitree: remplacement et reorganisation du vitrage avec une finition propre et professionnelle."
+  }
+] as const;
+
+const responseCommitments = [
+  "Diagnostic rapide de la casse et de la solution adaptee",
+  "Mise en securite immediate si le remplacement n'est pas possible sur place",
+  "Organisation du remplacement avec vitrage adapte au support",
+  "Finitions propres pour retrouver un site presentable rapidement"
+] as const;
+
+const workSteps = [
+  {
+    step: "01",
+    title: "Qualification",
+    description:
+      "Nous identifions le type de vitrage, le niveau d'urgence et la meilleure marche a suivre."
+  },
+  {
+    step: "02",
+    title: "Securisation",
+    description:
+      "La zone est protegee et isolee pour eviter tout risque supplementaire pour les occupants."
+  },
+  {
+    step: "03",
+    title: "Remplacement",
+    description:
+      "Nous preparons la repose avec les bonnes dimensions, le bon vitrage et la bonne finition."
+  }
+] as const;
+---
+
+<MarketingLayout
+  title="Intervention rapide"
+  description="Page dediee aux interventions rapides de vitrerie professionnelle."
+>
+  <main class="page-shell intervention-page">
+    <section class="intervention-hero">
+      <div class="intervention-hero__copy">
+        <p class="eyebrow">Intervention rapide</p>
+        <h1>Une intervention vitrerie rapide, propre et organisee.</h1>
+        <p class="intervention-hero__lead">
+          En cas de casse, de vitrage fragilise ou de facade a securiser, nous
+          intervenons avec une logique simple: proteger vite, remplacer juste
+          et remettre le site en ordre avec une finition serieuse.
+        </p>
+
+        <div class="intervention-actions">
+          <a class="button-link" href="/devis">Demander une intervention</a>
+          <a class="button-link button-link--secondary" href="/">Retour a l'accueil</a>
+        </div>
+
+        <div class="intervention-flags" aria-label="Points forts">
+          <span>Urgence</span>
+          <span>Mise en securite</span>
+          <span>Remplacement sur mesure</span>
+        </div>
+      </div>
+
+      <aside class="intervention-hero__panel">
+        <p class="intervention-panel__eyebrow">Ce que nous prenons en charge</p>
+        <ul class="intervention-panel__list">
+          <li>Fenetres cassees ou fissurees</li>
+          <li>Vitrines de commerce endommagees</li>
+          <li>Baies vitrees a remettre en securite</li>
+          <li>Parois et ensembles vitres a remplacer</li>
+        </ul>
+
+        <div class="intervention-panel__note">
+          <strong>Objectif:</strong>
+          <span>retablir vite la securite, la fermeture et une presentation propre du site.</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="intervention-cases">
+      {
+        emergencyCases.map((item) => (
+          <article class="intervention-case page-card">
+            <span class="intervention-case__icon">
+              <MarketingIcon name={item.icon} />
+            </span>
+            <h2>{item.title}</h2>
+            <p>{item.description}</p>
+          </article>
+        ))
+      }
+    </section>
+
+    <section class="intervention-layout">
+      <article class="page-card intervention-steps">
+        <p class="eyebrow">Deroule d'intervention</p>
+        <h2>Une methode claire pour aller vite sans improviser.</h2>
+
+        <div class="intervention-steps__grid">
+          {
+            workSteps.map((item) => (
+              <div class="intervention-step">
+                <span class="intervention-step__number">{item.step}</span>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </article>
+
+      <aside class="page-card intervention-commitments">
+        <p class="eyebrow">Engagement chantier</p>
+        <h2>Ce que vous devez retrouver apres notre passage.</h2>
+        <ul class="intervention-commitments__list">
+          {responseCommitments.map((item) => <li>{item}</li>)}
+        </ul>
+      </aside>
+    </section>
+
+    <section class="intervention-cta">
+      <div>
+        <p class="eyebrow">Besoin d'agir vite</p>
+        <h2>Declenchez votre demande d'intervention.</h2>
+        <p>
+          Donnez les dimensions, le type de vitrage et la nature du besoin pour
+          lancer la prise en charge dans de bonnes conditions.
+        </p>
+      </div>
+
+      <div class="intervention-cta__actions">
+        <a class="button-link" href="/devis">Acceder au devis</a>
+        <a class="button-link button-link--secondary" href="/">Revenir a l'accueil</a>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    .intervention-page {
+      display: grid;
+      gap: 1.35rem;
+    }
+
+    .intervention-hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+      gap: 1.2rem;
+      padding: clamp(1.3rem, 3vw, 2rem);
+      border-radius: 1.5rem;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), rgba(37, 99, 235, 0) 28%),
+        linear-gradient(135deg, #eff6ff 0%, #f8fbff 48%, #dbeafe 100%);
+      border: 1px solid rgba(37, 99, 235, 0.12);
+      overflow: hidden;
+    }
+
+    .intervention-hero::after {
+      content: "";
+      position: absolute;
+      right: -5rem;
+      top: -4rem;
+      width: 14rem;
+      height: 14rem;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.35);
+      filter: blur(8px);
+      pointer-events: none;
+    }
+
+    .intervention-hero__copy,
+    .intervention-hero__panel {
+      position: relative;
+      z-index: 1;
+    }
+
+    .intervention-hero__copy h1,
+    .intervention-layout h2,
+    .intervention-cta h2 {
+      margin-bottom: 0.85rem;
+      color: #0f2f57;
+      letter-spacing: -0.04em;
+      line-height: 0.98;
+    }
+
+    .intervention-hero__lead {
+      max-width: 40rem;
+      margin-bottom: 1.1rem;
+      color: #25405f;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .intervention-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .intervention-flags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .intervention-flags span {
+      padding: 0.55rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(15, 47, 87, 0.08);
+      color: #123b72;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .intervention-hero__panel {
+      padding: 1.2rem;
+      border-radius: 1.25rem;
+      background: rgba(15, 47, 87, 0.96);
+      color: #ffffff;
+      box-shadow: 0 20px 45px rgba(15, 47, 87, 0.18);
+    }
+
+    .intervention-panel__eyebrow {
+      margin-bottom: 0.8rem;
+      color: rgba(255, 255, 255, 0.74);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .intervention-panel__list {
+      margin: 0;
+      padding-left: 1.15rem;
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .intervention-panel__list li,
+    .intervention-panel__note span {
+      color: rgba(255, 255, 255, 0.82);
+      line-height: 1.6;
+    }
+
+    .intervention-panel__note {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .intervention-panel__note strong {
+      font-size: 0.88rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .intervention-cases {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .intervention-case {
+      display: grid;
+      gap: 0.8rem;
+      align-content: start;
+      border-radius: 1.25rem;
+      box-shadow: 0 14px 35px rgba(15, 47, 87, 0.06);
+    }
+
+    .intervention-case__icon {
+      width: 3rem;
+      height: 3rem;
+      display: grid;
+      place-items: center;
+      border-radius: 1rem;
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .intervention-case h2 {
+      margin: 0;
+      color: #0f2f57;
+      font-size: 1.12rem;
+      letter-spacing: -0.03em;
+    }
+
+    .intervention-case p {
+      margin: 0;
+    }
+
+    .intervention-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(18rem, 0.92fr);
+      gap: 1rem;
+    }
+
+    .intervention-steps,
+    .intervention-commitments {
+      border-radius: 1.25rem;
+    }
+
+    .intervention-steps__grid {
+      display: grid;
+      gap: 0.95rem;
+      margin-top: 1rem;
+    }
+
+    .intervention-step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.85rem;
+      align-items: start;
+      padding: 0.95rem 0;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .intervention-step:first-child {
+      padding-top: 0;
+      border-top: none;
+    }
+
+    .intervention-step__number {
+      min-width: 2.65rem;
+      min-height: 2.65rem;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-weight: 800;
+    }
+
+    .intervention-step h3 {
+      margin: 0 0 0.35rem;
+      color: #0f2f57;
+      font-size: 1rem;
+    }
+
+    .intervention-step p {
+      margin: 0;
+    }
+
+    .intervention-commitments {
+      background: linear-gradient(180deg, #103a73 0%, #11468d 100%);
+      border-color: rgba(17, 70, 141, 0.35);
+    }
+
+    .intervention-commitments .eyebrow,
+    .intervention-commitments h2 {
+      color: #ffffff;
+    }
+
+    .intervention-commitments h2 {
+      font-size: clamp(1.55rem, 3vw, 2.25rem);
+    }
+
+    .intervention-commitments__list {
+      margin: 1rem 0 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .intervention-commitments__list li {
+      color: rgba(255, 255, 255, 0.82);
+      line-height: 1.65;
+    }
+
+    .intervention-cta {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1rem;
+      align-items: center;
+      padding: clamp(1.2rem, 2.6vw, 1.8rem);
+      border-radius: 1.35rem;
+      background: #ffffff;
+      border: 1px solid #dbe5f0;
+      box-shadow: 0 16px 34px rgba(15, 47, 87, 0.06);
+    }
+
+    .intervention-cta p {
+      margin-bottom: 0;
+    }
+
+    .intervention-cta__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: flex-end;
+    }
+
+    @media (max-width: 960px) {
+      .intervention-hero,
+      .intervention-layout,
+      .intervention-cta {
+        grid-template-columns: 1fr;
+      }
+
+      .intervention-cases {
+        grid-template-columns: 1fr;
+      }
+
+      .intervention-cta__actions {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .intervention-hero {
+        padding: 1rem;
+      }
+
+      .intervention-hero__lead {
+        font-size: 0.95rem;
+      }
+
+      .intervention-actions,
+      .intervention-cta__actions {
+        display: grid;
+      }
+    }
+  </style>
+</MarketingLayout>

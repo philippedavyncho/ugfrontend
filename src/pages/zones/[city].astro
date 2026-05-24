@@ -1,0 +1,156 @@
+---
+import MarketingLayout from "../../layouts/MarketingLayout.astro";
+
+const { city = "votre ville" } = Astro.params;
+
+const cityName = city
+  .split("-")
+  .filter(Boolean)
+  .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+  .join(" ");
+
+const localPromises = [
+  "Interventions organisees pour les urgences et mises en securite",
+  "Pose de vitrages et remplacement avec approche propre et professionnelle",
+  "Prise de contact simplifiee pour accelerer l'estimation du besoin"
+] as const;
+
+const localCards = [
+  {
+    title: "Urgence locale",
+    description: "Une page de zone peut rassurer immediatement sur la capacite d'intervention dans la ville visee."
+  },
+  {
+    title: "Confort commercial",
+    description: "Elle peut aussi servir d'entree SEO locale pour les demandes de devis ou de remplacement."
+  },
+  {
+    title: "Discours adapte",
+    description: "Le message peut etre affine ensuite avec des services, quartiers ou cas d'usage plus precis."
+  }
+] as const;
+---
+
+<MarketingLayout
+  title={`Zone d'intervention ${cityName} | Univers Glass`}
+  description={`Presentation de la zone d'intervention ${cityName}.`}
+>
+  <main class="page-shell zone-page">
+    <section class="zone-hero">
+      <div class="zone-hero__copy">
+        <p class="eyebrow">Zone d'intervention</p>
+        <h1>Univers Glass peut se presenter clairement pour {cityName || "votre ville"}.</h1>
+        <p>
+          Cette page peut accueillir un contenu local plus detaille pour capter
+          les demandes de vitrerie dans une ville precise tout en gardant une
+          image propre, technique et rassurante.
+        </p>
+
+        <div class="actions">
+          <a class="button-link" href="/devis">Demander un devis</a>
+          <a class="button-link button-link--secondary" href="/intervention-rapide">Intervention rapide</a>
+        </div>
+      </div>
+
+      <aside class="zone-hero__panel">
+        <p class="eyebrow">Promesse locale</p>
+        <ul>
+          {localPromises.map((item) => <li>{item}</li>)}
+        </ul>
+      </aside>
+    </section>
+
+    <section class="zone-grid">
+      {
+        localCards.map((item) => (
+          <article class="page-card zone-card">
+            <h2>{item.title}</h2>
+            <p>{item.description}</p>
+          </article>
+        ))
+      }
+    </section>
+  </main>
+
+  <style>
+    .zone-page {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .zone-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(17rem, 0.88fr);
+      gap: 1rem;
+    }
+
+    .zone-hero__copy,
+    .zone-hero__panel {
+      padding: clamp(1.3rem, 2.7vw, 1.95rem);
+      border-radius: 1.5rem;
+    }
+
+    .zone-hero__copy {
+      background:
+        radial-gradient(circle at top left, rgba(35, 111, 210, 0.16), rgba(35, 111, 210, 0) 28%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(247, 251, 255, 0.96) 100%);
+      border: 1px solid rgba(203, 218, 236, 0.82);
+      box-shadow: 0 22px 50px rgba(16, 49, 93, 0.08);
+    }
+
+    .zone-hero__copy p {
+      max-width: 40rem;
+    }
+
+    .zone-hero__panel {
+      background: linear-gradient(145deg, #103a73 0%, #1459ad 100%);
+      box-shadow: 0 24px 54px rgba(16, 49, 93, 0.16);
+    }
+
+    .zone-hero__panel .eyebrow {
+      color: rgba(255, 255, 255, 0.72);
+      margin-bottom: 1rem;
+    }
+
+    .zone-hero__panel ul {
+      margin: 0;
+      padding-left: 1.15rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .zone-hero__panel li {
+      color: rgba(255, 255, 255, 0.84);
+      line-height: 1.65;
+    }
+
+    .zone-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .zone-card {
+      display: grid;
+      gap: 0.8rem;
+      align-content: start;
+    }
+
+    .zone-card h2 {
+      margin: 0;
+      color: #0f2f57;
+      font-size: 1.1rem;
+    }
+
+    .zone-card p {
+      margin: 0;
+    }
+
+    @media (max-width: 920px) {
+      .zone-hero,
+      .zone-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</MarketingLayout>
