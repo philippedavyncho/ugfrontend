@@ -1,87 +1,285 @@
 ---
-import MarketingLayout from "../../layouts/MarketingLayout.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import MarketingIcon from "../../components/ui/MarketingIcon.astro";
+import "../../styles/univers-glass-pages.css";
 
-const apiBaseUrl = import.meta.env.PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000/api";
+const apiBaseUrl = "/api";
 
-const quoteBenefits = [
+const quoteHighlights = [
   {
     icon: "glass",
-    title: "Vitrage adapte",
-    description: "Choisissez le bon type de vitrage selon l'usage, le rendu et la surface a traiter."
+    tone: "blue",
+    title: "VITRAGE",
+    subtitle: "ADAPTE"
   },
   {
     icon: "thermo",
-    title: "Lecture technique",
-    description: "L'estimation prend en compte les options, l'epaisseur et la nature de la prestation."
+    tone: "blue",
+    title: "LECTURE",
+    subtitle: "TECHNIQUE"
   },
   {
-    icon: "repair",
-    title: "Suite exploitable",
-    description: "Le resultat sert de base claire pour avancer rapidement sur une demande serieuse."
+    icon: "quote",
+    tone: "red",
+    title: "DEVIS",
+    subtitle: "CLAIR"
   }
 ] as const;
 
 const quoteChecklist = [
-  "Largeur et hauteur utiles de l'ouverture",
-  "Type de vitrage souhaite ou niveau de performance vise",
-  "Nature exacte de la pose ou du remplacement"
+  "Dimensions utiles de l'ouverture",
+  "Type de vitrage souhaite",
+  "Prestation exacte a realiser",
+  "Options ou niveau de performance vise"
+] as const;
+
+const quoteProcess = [
+  {
+    step: "01",
+    title: "Configurer",
+    description:
+      "Vous renseignez les dimensions, le type de vitrage, l'epaisseur et la prestation visee."
+  },
+  {
+    step: "02",
+    title: "Calculer",
+    description:
+      "Le simulateur assemble la surface, le vitrage, la main d'oeuvre et les options dans une seule lecture."
+  },
+  {
+    step: "03",
+    title: "Exploiter",
+    description:
+      "Le resultat devient une base claire pour enchainer vers une demande plus precise ou une urgence."
+  }
+] as const;
+
+const quoteBenefits = [
+  {
+    icon: "glass",
+    title: "Configuration nette",
+    description:
+      "Chaque choix garde une lecture simple pour cadrer tout de suite le bon vitrage."
+  },
+  {
+    icon: "thermo",
+    title: "Calcul structure",
+    description:
+      "Le prix relie surface, vitrage, main d'oeuvre et options sans perdre la logique technique."
+  },
+  {
+    icon: "repair",
+    title: "Suite exploitable",
+    description:
+      "Le resultat devient une base claire pour avancer rapidement sur une vraie demande."
+  }
+] as const;
+
+const quoteTrustItems = [
+  {
+    icon: "quality",
+    label: "CONFIGURATION DYNAMIQUE"
+  },
+  {
+    icon: "clock",
+    label: "PARCOURS RAPIDE"
+  },
+  {
+    icon: "shield",
+    label: "LECTURE TECHNIQUE"
+  },
+  {
+    icon: "people",
+    label: "RESULTAT CLAIR"
+  }
 ] as const;
 ---
 
-<MarketingLayout
+<BaseLayout
   title="Demande de devis"
-  description="Calculez un devis vitrerie relie au backend."
+  description="Calculez une estimation claire pour votre projet vitrerie."
 >
-  <main class="page-shell">
-    <section class="quote-page" data-api-base={apiBaseUrl}>
-      <section class="quote-hero">
-        <div class="quote-hero__copy">
-          <p class="eyebrow">Demande de devis</p>
-          <h1>Calculez une estimation claire pour votre projet vitrerie.</h1>
-          <p>
-            Cette page relie maintenant les configurations, les prestations et
-            le calcul du prix au backend. Vous gardez un parcours simple, mais
-            avec une lecture beaucoup plus propre du besoin.
+  <main class="home-shell">
+    <section class="hero-card quote-page" data-api-base={apiBaseUrl}>
+      <div class="hero-main">
+        <div class="hero-copy">
+          <div class="hero-copy__bg" aria-hidden="true"></div>
+
+          <a class="brand-lockup" href="/" aria-label="Univers Glass">
+            <svg viewBox="0 0 54 74" aria-hidden="true">
+              <path
+                d="M7 7.5 28 1v65L7 72.5Z"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="5"
+              ></path>
+              <path d="M34 7.5 47 4v64l-13 3.5Z" fill="currentColor"></path>
+            </svg>
+
+            <span class="brand-copy">
+              <strong>UNIVERS GLASS</strong>
+              <span>LA TRANSPARENCE AU SERVICE DE VOS PROJETS</span>
+            </span>
+          </a>
+
+          <h1 class="hero-title">
+            <span>DEVIS</span>
+            <span class="hero-title--accent">CLAIR ET</span>
+            <span>RAPIDE</span>
+          </h1>
+
+          <span class="hero-rule" aria-hidden="true"></span>
+
+          <p class="hero-description">
+            Renseignez les dimensions, le vitrage, la prestation et les options
+            pour obtenir une estimation propre, lisible et directement utile.
           </p>
 
-          <div class="actions">
-            <a class="button-link" href="/intervention-rapide">Besoin d'une urgence</a>
-            <a class="button-link button-link--secondary" href="/">Retour a l'accueil</a>
+          <div class="feature-list">
+            {
+              quoteHighlights.map((feature) => (
+                <div class={`feature-item feature-item--${feature.tone}`}>
+                  <span class="feature-item__icon">
+                    <MarketingIcon name={feature.icon} />
+                  </span>
+
+                  <span class="feature-item__copy">
+                    <span>{feature.title}</span>
+                    <span>{feature.subtitle}</span>
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+
+          <div class="hero-actions">
+            <a class="hero-button hero-button--blue" href="#quote-workbench">
+              <span class="hero-button__icon">
+                <MarketingIcon name="quote" />
+              </span>
+
+              <span class="hero-button__copy">
+                <small>LANCER LE</small>
+                <strong>CALCUL DU DEVIS</strong>
+              </span>
+            </a>
+
+            <a class="hero-button hero-button--red" href="/intervention-rapide">
+              <span class="hero-button__icon">
+                <MarketingIcon name="arrow" />
+              </span>
+
+              <span class="hero-button__copy">
+                <small>BESOIN D'UNE</small>
+                <strong>INTERVENTION RAPIDE</strong>
+              </span>
+            </a>
           </div>
         </div>
 
-        <aside class="quote-hero__panel">
-          <p class="eyebrow">Avant de commencer</p>
-          <ul class="quote-hero__list">
-            {quoteChecklist.map((item) => <li>{item}</li>)}
-          </ul>
-          <span class="quote-hero__badge">Estimation structuree et rapide</span>
-        </aside>
-      </section>
+        <div class="hero-media">
+          <img
+            src="/fonds.png"
+            alt="Maison moderne avec large baie vitree"
+            loading="eager"
+          />
+        </div>
+      </div>
 
-      <section class="quote-benefits">
+      <div class="hero-bottom">
+        <div class="hero-bottom__items">
+          {
+            quoteTrustItems.map((item) => (
+              <div class="trust-item">
+                <span class="trust-item__icon">
+                  <MarketingIcon name={item.icon} />
+                </span>
+                <span class="trust-item__label">{item.label}</span>
+              </div>
+            ))
+          }
+        </div>
+
+        <a class="contact-panel" href="#quote-workbench">
+          <span class="contact-panel__icon">
+            <MarketingIcon name="mail" />
+          </span>
+
+          <span class="contact-panel__copy">
+            <strong>CALCULER LE DEVIS</strong>
+            <small>Renseignez le formulaire et lancez l'estimation</small>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <section class="showcase-section" data-animate="showcase">
+      <div class="showcase-heading">
+        <span class="section-kicker">DEMANDE PREPAREE</span>
+        <h2>De quoi lancer votre devis sans perdre de temps.</h2>
+        <p>
+          Avant le calcul, il suffit de poser les informations qui cadrent
+          vraiment le besoin. Le reste suit dans le meme esprit visuel que la
+          page d'accueil.
+        </p>
+      </div>
+
+      <div class="quote-checklist-grid">
         {
-          quoteBenefits.map((item) => (
-            <article class="page-card quote-benefit">
-              <span class="quote-benefit__icon">
-                <MarketingIcon name={item.icon} />
+          quoteChecklist.map((item) => (
+            <article class="quote-checklist-card">
+              <span class="quote-checklist-card__icon">
+                <MarketingIcon name="shield" />
               </span>
-              <h2>{item.title}</h2>
+              <p>{item}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="signature-section" data-animate="signature">
+      <div class="signature-copy">
+        <span class="section-kicker">METHODE DEVIS</span>
+        <h2>Une logique simple pour passer du besoin a une estimation claire.</h2>
+        <p>
+          La page de devis reprend la meme tenue que l'accueil et
+          l'intervention rapide, tout en gardant un parcours facile a lire
+          entre les choix techniques et le prix estime.
+        </p>
+      </div>
+
+      <div class="signature-grid">
+        {
+          quoteProcess.map((item) => (
+            <article class="signature-card">
+              <span class="signature-card__step">{item.step}</span>
+              <h3>{item.title}</h3>
               <p>{item.description}</p>
             </article>
           ))
         }
-      </section>
+      </div>
+    </section>
+
+    <section class="showcase-section quote-workbench" id="quote-workbench">
+      <div class="showcase-heading">
+        <span class="section-kicker">CONFIGURATION</span>
+        <h2>Renseignez le vitrage et obtenez une estimation lisible.</h2>
+        <p>
+          Le formulaire garde la logique de calcul existante, mais s'insere
+          maintenant dans une mise en page alignee sur la home.
+        </p>
+      </div>
 
       <div class="quote-layout">
-        <section class="page-card quote-form-card">
+        <section class="quote-form-surface">
           <div class="quote-panel__intro">
-            <p class="eyebrow">Configuration</p>
-            <h2>Renseignez les caracteristiques du vitrage.</h2>
+            <span class="section-kicker">FORMULAIRE</span>
+            <h3>Caracteristiques du vitrage</h3>
             <p>
-              Selectionnez le vitrage, l'epaisseur, la prestation et les options
-              pour lancer une estimation propre.
+              Largeur, hauteur, type de vitrage, epaisseur, prestation et
+              options.
             </p>
           </div>
 
@@ -127,18 +325,18 @@ const quoteChecklist = [
             </fieldset>
 
             <div class="form-actions">
-              <button class="button-link" type="submit" data-role="submit" disabled>
+              <button class="quote-submit" type="submit" data-role="submit" disabled>
                 Calculer le devis
               </button>
-              <a class="button-link button-link--secondary" href="/">Retour a l'accueil</a>
+              <a class="quote-link" href="/">Retour a l'accueil</a>
             </div>
           </form>
         </section>
 
-        <aside class="page-card quote-result-card">
-          <div class="quote-panel__intro">
-            <p class="eyebrow">Resultat</p>
-            <h2>Votre estimation apparait ici.</h2>
+        <aside class="quote-result-surface">
+          <div class="quote-panel__intro quote-panel__intro--light">
+            <span class="section-kicker section-kicker--light">RESULTAT</span>
+            <h3>Votre estimation apparait ici</h3>
             <p>
               Le detail du cout s'affiche apres calcul avec une lecture simple
               de la surface, du vitrage, de la main d'oeuvre et des options.
@@ -175,11 +373,61 @@ const quoteChecklist = [
             </div>
 
             <div class="result-breakdown">
-              <p class="eyebrow">Detail</p>
+              <span class="section-kicker section-kicker--light">DETAIL</span>
               <ul class="simple-list" data-role="breakdown"></ul>
             </div>
           </div>
         </aside>
+      </div>
+    </section>
+
+    <section class="signature-section quote-cta-section">
+      <div class="signature-copy">
+        <span class="section-kicker">ALLER PLUS LOIN</span>
+        <h2>Un devis pense pour s'aligner naturellement avec le reste du site.</h2>
+        <p>
+          Une fois le calcul lance, vous gardez la meme ambiance que sur
+          l'accueil et l'intervention rapide, avec des points d'entree clairs
+          pour continuer votre parcours.
+        </p>
+      </div>
+
+      <div class="quote-cta-layout">
+        {
+          quoteBenefits.map((item) => (
+            <article class="signature-card quote-cta-card">
+              <span class="signature-card__icon">
+                <MarketingIcon name={item.icon} />
+              </span>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
+          ))
+        }
+
+        <div class="quote-cta-actions">
+          <a class="hero-button hero-button--red" href="/intervention-rapide">
+            <span class="hero-button__icon">
+              <MarketingIcon name="arrow" />
+            </span>
+
+            <span class="hero-button__copy">
+              <small>BESOIN D'UNE</small>
+              <strong>INTERVENTION RAPIDE</strong>
+            </span>
+          </a>
+
+          <a class="hero-button hero-button--blue" href="/">
+            <span class="hero-button__icon">
+              <MarketingIcon name="quote" />
+            </span>
+
+            <span class="hero-button__copy">
+              <small>RETOUR A</small>
+              <strong>L'ACCUEIL</strong>
+            </span>
+          </a>
+        </div>
       </div>
     </section>
   </main>
@@ -308,7 +556,7 @@ const quoteChecklist = [
           renderConfig(config);
         } catch (error) {
           console.error(error);
-          setStatus("Impossible de charger le backend. Verifiez que Django tourne sur le port 8000.", "error");
+          setStatus("Impossible de charger la configuration du devis. Verifiez que le backend est disponible.", "error");
         }
       };
 
@@ -357,136 +605,141 @@ const quoteChecklist = [
     })();
   </script>
 
+  <script>
+    import "../../scripts/home-animations";
+  </script>
+
   <style>
-    .quote-page {
-      display: grid;
-      gap: 1.2rem;
+    .section-kicker--light {
+      color: rgba(255, 255, 255, 0.82);
     }
 
-    .quote-hero {
+    .quote-checklist-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.12fr) minmax(18rem, 0.88fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 1rem;
+      margin-top: 1.35rem;
     }
 
-    .quote-hero__copy,
-    .quote-hero__panel {
-      padding: clamp(1.3rem, 2.8vw, 1.95rem);
-      border-radius: 1.55rem;
+    .quote-checklist-card {
+      min-height: 100%;
+      padding: 1.1rem;
+      border-radius: 1.35rem;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 18px 32px rgba(16, 49, 93, 0.08);
     }
 
-    .quote-hero__copy {
-      background:
-        radial-gradient(circle at top left, rgba(35, 111, 210, 0.16), rgba(35, 111, 210, 0) 28%),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(247, 251, 255, 0.96) 100%);
-      border: 1px solid rgba(203, 218, 236, 0.82);
-      box-shadow: 0 22px 50px rgba(16, 49, 93, 0.08);
-    }
-
-    .quote-hero__copy p {
-      max-width: 39rem;
-    }
-
-    .quote-hero__panel {
-      background: linear-gradient(145deg, #103a73 0%, #1459ad 100%);
-      box-shadow: 0 24px 54px rgba(16, 49, 93, 0.16);
-    }
-
-    .quote-hero__panel .eyebrow {
-      color: rgba(255, 255, 255, 0.72);
-      margin-bottom: 1rem;
-    }
-
-    .quote-hero__list {
-      margin: 0;
-      padding-left: 1.15rem;
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    .quote-hero__list li {
-      color: rgba(255, 255, 255, 0.84);
-      line-height: 1.65;
-    }
-
-    .quote-hero__badge {
-      width: fit-content;
-      margin-top: 1rem;
-      padding: 0.58rem 0.84rem;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.12);
-      color: #ffffff;
-      font-size: 0.75rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .quote-benefits {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .quote-benefit {
-      display: grid;
-      gap: 0.8rem;
-      align-content: start;
-    }
-
-    .quote-benefit__icon {
-      width: 3rem;
-      height: 3rem;
+    .quote-checklist-card__icon {
+      width: 2.8rem;
+      height: 2.8rem;
       display: grid;
       place-items: center;
+      margin-bottom: 0.9rem;
       border-radius: 1rem;
-      background: #eff6ff;
-      color: #1d4ed8;
+      background: linear-gradient(135deg, rgba(35, 111, 210, 0.12), rgba(35, 111, 210, 0.18));
+      color: #165fbc;
     }
 
-    .quote-benefit h2,
-    .quote-panel__intro h2 {
+    .quote-checklist-card p {
       margin: 0;
-      color: #0f2f57;
-      letter-spacing: -0.03em;
+      color: #27456e;
+      font-weight: 700;
+      line-height: 1.55;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      letter-spacing: 0.03em;
     }
 
-    .quote-benefit h2 {
-      font-size: 1.08rem;
-    }
-
-    .quote-benefit p,
-    .quote-panel__intro p {
-      margin: 0;
+    .signature-section {
+      display: grid;
+      grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+      gap: clamp(1rem, 2vw, 1.6rem);
+      align-items: start;
     }
 
     .quote-layout {
       display: grid;
-      grid-template-columns: minmax(0, 1.18fr) minmax(20rem, 0.82fr);
+      grid-template-columns: minmax(0, 1.14fr) minmax(20rem, 0.86fr);
       gap: 1rem;
+      align-items: start;
+      margin-top: 1.35rem;
+    }
+
+    .quote-cta-section {
       align-items: start;
     }
 
-    .quote-form-card,
-    .quote-result-card {
+    .quote-cta-layout {
       display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1rem;
-      align-content: start;
+      width: 100%;
+    }
+
+    .quote-cta-card {
+      min-height: 100%;
+    }
+
+    .quote-cta-actions {
+      display: grid;
+      grid-column: 1 / -1;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      align-content: stretch;
+    }
+
+    .quote-form-surface,
+    .quote-result-surface {
       border-radius: 1.55rem;
     }
 
-    .quote-result-card {
+    .quote-form-surface {
+      padding: clamp(1.2rem, 2.2vw, 1.6rem);
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 20px 44px rgba(16, 49, 93, 0.08);
+    }
+
+    .quote-result-surface {
       position: sticky;
       top: 1rem;
+      padding: clamp(1.2rem, 2.2vw, 1.6rem);
+      background:
+        radial-gradient(circle at top right, rgba(227, 27, 35, 0.14), rgba(227, 27, 35, 0) 26%),
+        linear-gradient(135deg, #103a73 0%, #11468d 55%, #1e5fb3 100%);
+      box-shadow: 0 24px 54px rgba(16, 49, 93, 0.18);
     }
 
     .quote-panel__intro {
       display: grid;
       gap: 0.45rem;
+      margin-bottom: 1rem;
     }
 
-    .quote-panel__intro h2 {
-      font-size: clamp(1.4rem, 2.4vw, 2rem);
+    .quote-panel__intro :global(.section-kicker) {
+      margin-bottom: 0.15rem;
+    }
+
+    .quote-panel__intro h3 {
+      margin: 0;
+      color: #103a73;
+      font-size: clamp(1.35rem, 2vw, 1.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    .quote-panel__intro p {
+      margin: 0;
+      color: #36506f;
+      line-height: 1.65;
+    }
+
+    .quote-panel__intro--light h3 {
+      color: #ffffff;
+    }
+
+    .quote-panel__intro--light p {
+      color: rgba(255, 255, 255, 0.78);
     }
 
     .quote-status {
@@ -498,18 +751,19 @@ const quoteChecklist = [
     }
 
     .quote-status[data-state="success"] {
-      background: #dcfce7;
+      background: rgba(22, 101, 52, 0.12);
       color: #166534;
     }
 
     .quote-status[data-state="error"] {
-      background: #fee2e2;
+      background: rgba(153, 27, 27, 0.12);
       color: #991b1b;
     }
 
     .quote-form {
       display: grid;
       gap: 1.1rem;
+      margin-top: 1rem;
     }
 
     .form-grid {
@@ -529,9 +783,11 @@ const quoteChecklist = [
 
     .field span,
     .options legend {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: #0f172a;
+      font-size: 0.84rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #0f2f57;
     }
 
     .field input,
@@ -541,7 +797,7 @@ const quoteChecklist = [
       border: 1px solid #cbdaec;
       border-radius: 1rem;
       font: inherit;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.96);
       color: #0f2f57;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
     }
@@ -581,11 +837,45 @@ const quoteChecklist = [
       gap: 0.75rem;
     }
 
+    .quote-submit,
+    .quote-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3.15rem;
+      padding: 0.9rem 1.2rem;
+      border-radius: 1rem;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .quote-submit {
+      border: none;
+      background: linear-gradient(135deg, #ef232b 0%, #de1820 100%);
+      color: #ffffff;
+      box-shadow: 0 14px 22px rgba(132, 15, 23, 0.2);
+      cursor: pointer;
+    }
+
+    .quote-submit:disabled {
+      cursor: wait;
+      opacity: 0.78;
+    }
+
+    .quote-link {
+      background: linear-gradient(135deg, #236fd2 0%, #155fbc 100%);
+      color: #ffffff;
+      box-shadow: 0 14px 22px rgba(16, 49, 93, 0.12);
+    }
+
     .result-empty {
       padding: 1rem;
       border-radius: 1.05rem;
-      background: rgba(244, 248, 253, 0.92);
-      color: #4f6988;
+      background: rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.82);
       line-height: 1.6;
     }
 
@@ -599,15 +889,15 @@ const quoteChecklist = [
       gap: 0.35rem;
       padding: 1.1rem;
       border-radius: 1.15rem;
-      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-      color: #1d4ed8;
+      background: #ffffff;
+      color: #11468d;
     }
 
     .result-total span {
-      font-size: 0.9rem;
-      font-weight: 700;
+      font-size: 0.82rem;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
     }
 
     .result-total strong {
@@ -624,49 +914,60 @@ const quoteChecklist = [
     .result-summary div {
       padding: 0.95rem;
       border-radius: 1rem;
-      background: rgba(244, 248, 253, 0.92);
+      background: rgba(255, 255, 255, 0.12);
     }
 
     .result-summary span {
       display: block;
       margin-bottom: 0.3rem;
-      color: #64748b;
-      font-size: 0.82rem;
-      font-weight: 700;
+      color: rgba(255, 255, 255, 0.64);
+      font-size: 0.76rem;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
     }
 
     .result-summary strong {
-      color: #0f172a;
+      color: #ffffff;
       font-size: 1rem;
     }
 
-    .result-breakdown .simple-list {
-      margin-top: 0.5rem;
+    .result-breakdown :global(.simple-list) {
+      margin-top: 0.45rem;
+      color: rgba(255, 255, 255, 0.84);
     }
 
-    @media (max-width: 900px) {
-      .quote-hero,
-      .quote-benefits,
+    @media (max-width: 1180px) {
+      .quote-checklist-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 960px) {
       .quote-layout {
         grid-template-columns: 1fr;
       }
 
-      .quote-result-card {
+      .quote-result-surface {
         position: static;
       }
     }
 
     @media (max-width: 640px) {
+      .quote-checklist-grid,
       .form-grid,
-      .result-summary {
+      .result-summary,
+      .quote-cta-layout {
         grid-template-columns: 1fr;
       }
 
       .form-actions {
         display: grid;
       }
+
+      .quote-cta-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
   </style>
-</MarketingLayout>
+</BaseLayout>

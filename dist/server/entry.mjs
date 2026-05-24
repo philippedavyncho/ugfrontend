@@ -1,26 +1,30 @@
 import { renderers } from './renderers.mjs';
-import { c as createExports, s as serverEntrypointModule } from './chunks/_@astrojs-ssr-adapter_DX-dElGd.mjs';
-import { manifest } from './manifest_Bodm95o-.mjs';
+import { c as createExports, s as serverEntrypointModule } from './chunks/_@astrojs-ssr-adapter_CRWLNEok.mjs';
+import { manifest } from './manifest_CCWXush_.mjs';
 
 const serverIslandMap = new Map();;
 
 const _page0 = () => import('./pages/_image.astro.mjs');
 const _page1 = () => import('./pages/404.astro.mjs');
-const _page2 = () => import('./pages/devis/merci.astro.mjs');
-const _page3 = () => import('./pages/devis.astro.mjs');
-const _page4 = () => import('./pages/intervention-rapide.astro.mjs');
-const _page5 = () => import('./pages/services/_slug_.astro.mjs');
-const _page6 = () => import('./pages/zones/_city_.astro.mjs');
-const _page7 = () => import('./pages/index.astro.mjs');
+const _page2 = () => import('./pages/api/_---path_.astro.mjs');
+const _page3 = () => import('./pages/contact.astro.mjs');
+const _page4 = () => import('./pages/devis/merci.astro.mjs');
+const _page5 = () => import('./pages/devis.astro.mjs');
+const _page6 = () => import('./pages/intervention-rapide.astro.mjs');
+const _page7 = () => import('./pages/services/_slug_.astro.mjs');
+const _page8 = () => import('./pages/zones/_city_.astro.mjs');
+const _page9 = () => import('./pages/index.astro.mjs');
 const pageMap = new Map([
     ["node_modules/astro/dist/assets/endpoint/node.js", _page0],
     ["src/pages/404.astro", _page1],
-    ["src/pages/devis/merci.astro", _page2],
-    ["src/pages/devis/index.astro", _page3],
-    ["src/pages/intervention-rapide.astro", _page4],
-    ["src/pages/services/[slug].astro", _page5],
-    ["src/pages/zones/[city].astro", _page6],
-    ["src/pages/index.astro", _page7]
+    ["src/pages/api/[...path].ts", _page2],
+    ["src/pages/contact.astro", _page3],
+    ["src/pages/devis/merci.astro", _page4],
+    ["src/pages/devis/index.astro", _page5],
+    ["src/pages/intervention-rapide.astro", _page6],
+    ["src/pages/services/[slug].astro", _page7],
+    ["src/pages/zones/[city].astro", _page8],
+    ["src/pages/index.astro", _page9]
 ]);
 
 const _manifest = Object.assign(manifest, {

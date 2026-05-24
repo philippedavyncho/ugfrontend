@@ -1,6 +1,47 @@
 ---
-import MarketingLayout from "../layouts/MarketingLayout.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 import MarketingIcon from "../components/ui/MarketingIcon.astro";
+import "../styles/univers-glass-pages.css";
+
+const emergencyHighlights = [
+  {
+    icon: "repair",
+    tone: "red",
+    title: "BRIS DE",
+    subtitle: "GLACE"
+  },
+  {
+    icon: "shield",
+    tone: "blue",
+    title: "MISE EN",
+    subtitle: "SECURITE"
+  },
+  {
+    icon: "glass",
+    tone: "blue",
+    title: "REPOSE",
+    subtitle: "SUR MESURE"
+  }
+] as const;
+
+const interventionTrustItems = [
+  {
+    icon: "clock",
+    label: "DIAGNOSTIC RAPIDE"
+  },
+  {
+    icon: "shield",
+    label: "SITE SECURISE"
+  },
+  {
+    icon: "quality",
+    label: "FINITION PROPRE"
+  },
+  {
+    icon: "people",
+    label: "PRISE EN CHARGE CLAIRE"
+  }
+] as const;
 
 const emergencyCases = [
   {
@@ -23,13 +64,6 @@ const emergencyCases = [
   }
 ] as const;
 
-const responseCommitments = [
-  "Diagnostic rapide de la casse et de la solution adaptee",
-  "Mise en securite immediate si le remplacement n'est pas possible sur place",
-  "Organisation du remplacement avec vitrage adapte au support",
-  "Finitions propres pour retrouver un site presentable rapidement"
-] as const;
-
 const workSteps = [
   {
     step: "01",
@@ -50,97 +84,208 @@ const workSteps = [
       "Nous preparons la repose avec les bonnes dimensions, le bon vitrage et la bonne finition."
   }
 ] as const;
+
+const responseCommitments = [
+  "Diagnostic rapide de la casse et de la solution adaptee",
+  "Mise en securite immediate si le remplacement n'est pas possible sur place",
+  "Organisation du remplacement avec vitrage adapte au support",
+  "Finitions propres pour retrouver un site presentable rapidement"
+] as const;
 ---
 
-<MarketingLayout
+<BaseLayout
   title="Intervention rapide"
   description="Page dediee aux interventions rapides de vitrerie professionnelle."
 >
-  <main class="page-shell intervention-page">
-    <section class="intervention-hero">
-      <div class="intervention-hero__copy">
-        <p class="eyebrow">Intervention rapide</p>
-        <h1>Une intervention vitrerie rapide, propre et organisee.</h1>
-        <p class="intervention-hero__lead">
-          En cas de casse, de vitrage fragilise ou de facade a securiser, nous
-          intervenons avec une logique simple: proteger vite, remplacer juste
-          et remettre le site en ordre avec une finition serieuse.
-        </p>
+  <main class="home-shell">
+    <section class="hero-card">
+      <div class="hero-main">
+        <div class="hero-copy">
+          <div class="hero-copy__bg" aria-hidden="true"></div>
 
-        <div class="intervention-actions">
-          <a class="button-link" href="/devis">Demander une intervention</a>
-          <a class="button-link button-link--secondary" href="/">Retour a l'accueil</a>
+          <a class="brand-lockup" href="/" aria-label="Univers Glass">
+            <svg viewBox="0 0 54 74" aria-hidden="true">
+              <path
+                d="M7 7.5 28 1v65L7 72.5Z"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="5"
+              ></path>
+              <path d="M34 7.5 47 4v64l-13 3.5Z" fill="currentColor"></path>
+            </svg>
+
+            <span class="brand-copy">
+              <strong>UNIVERS GLASS</strong>
+              <span>LA TRANSPARENCE AU SERVICE DE VOS PROJETS</span>
+            </span>
+          </a>
+
+          <h1 class="hero-title">
+            <span>INTERVENTION</span>
+            <span class="hero-title--accent">RAPIDE ET</span>
+            <span>PROPRE</span>
+          </h1>
+
+          <span class="hero-rule" aria-hidden="true"></span>
+
+          <p class="hero-description">
+            En cas de casse, de vitrage fragilise ou de facade a securiser, nous
+            intervenons pour proteger vite, remettre en securite et relancer une
+            finition serieuse.
+          </p>
+
+          <div class="feature-list">
+            {
+              emergencyHighlights.map((feature) => (
+                <div class={`feature-item feature-item--${feature.tone}`}>
+                  <span class="feature-item__icon">
+                    <MarketingIcon name={feature.icon} />
+                  </span>
+
+                  <span class="feature-item__copy">
+                    <span>{feature.title}</span>
+                    <span>{feature.subtitle}</span>
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+
+          <div class="hero-actions">
+            <a class="hero-button hero-button--red" href="/devis">
+              <span class="hero-button__icon">
+                <MarketingIcon name="arrow" />
+              </span>
+
+              <span class="hero-button__copy">
+                <small>DECLENCHER UNE</small>
+                <strong>DEMANDE D'INTERVENTION</strong>
+              </span>
+            </a>
+
+            <a class="hero-button hero-button--blue" href="#intervention-method">
+              <span class="hero-button__icon">
+                <MarketingIcon name="shield" />
+              </span>
+
+              <span class="hero-button__copy">
+                <small>VOIR LA</small>
+                <strong>METHODE D'INTERVENTION</strong>
+              </span>
+            </a>
+          </div>
         </div>
 
-        <div class="intervention-flags" aria-label="Points forts">
-          <span>Urgence</span>
-          <span>Mise en securite</span>
-          <span>Remplacement sur mesure</span>
+        <div class="hero-media">
+          <img
+            src="/fonds.png"
+            alt="Facade vitree moderne a remettre rapidement en securite"
+            loading="eager"
+          />
         </div>
       </div>
 
-      <aside class="intervention-hero__panel">
-        <p class="intervention-panel__eyebrow">Ce que nous prenons en charge</p>
-        <ul class="intervention-panel__list">
-          <li>Fenetres cassees ou fissurees</li>
-          <li>Vitrines de commerce endommagees</li>
-          <li>Baies vitrees a remettre en securite</li>
-          <li>Parois et ensembles vitres a remplacer</li>
-        </ul>
-
-        <div class="intervention-panel__note">
-          <strong>Objectif:</strong>
-          <span>retablir vite la securite, la fermeture et une presentation propre du site.</span>
-        </div>
-      </aside>
-    </section>
-
-    <section class="intervention-cases">
-      {
-        emergencyCases.map((item) => (
-          <article class="intervention-case page-card">
-            <span class="intervention-case__icon">
-              <MarketingIcon name={item.icon} />
-            </span>
-            <h2>{item.title}</h2>
-            <p>{item.description}</p>
-          </article>
-        ))
-      }
-    </section>
-
-    <section class="intervention-layout">
-      <article class="page-card intervention-steps">
-        <p class="eyebrow">Deroule d'intervention</p>
-        <h2>Une methode claire pour aller vite sans improviser.</h2>
-
-        <div class="intervention-steps__grid">
+      <div class="hero-bottom">
+        <div class="hero-bottom__items">
           {
-            workSteps.map((item) => (
-              <div class="intervention-step">
-                <span class="intervention-step__number">{item.step}</span>
-                <div>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </div>
+            interventionTrustItems.map((item) => (
+              <div class="trust-item">
+                <span class="trust-item__icon">
+                  <MarketingIcon name={item.icon} />
+                </span>
+                <span class="trust-item__label">{item.label}</span>
               </div>
             ))
           }
         </div>
-      </article>
 
-      <aside class="page-card intervention-commitments">
-        <p class="eyebrow">Engagement chantier</p>
-        <h2>Ce que vous devez retrouver apres notre passage.</h2>
-        <ul class="intervention-commitments__list">
-          {responseCommitments.map((item) => <li>{item}</li>)}
-        </ul>
-      </aside>
+        <a class="contact-panel" href="/contact">
+          <span class="contact-panel__icon">
+            <MarketingIcon name="mail" />
+          </span>
+
+          <span class="contact-panel__copy">
+            <strong>CONTACTEZ-NOUS</strong>
+            <small>Detaillez l'urgence et la prise en charge souhaitee</small>
+          </span>
+        </a>
+      </div>
     </section>
 
-    <section class="intervention-cta">
-      <div>
-        <p class="eyebrow">Besoin d'agir vite</p>
+    <section class="showcase-section" data-animate="showcase">
+      <div class="showcase-heading">
+        <span class="section-kicker">CAS PRIS EN CHARGE</span>
+        <h2>Des urgences traitees avec la meme tenue visuelle que la home.</h2>
+        <p>
+          Chaque intervention reste cadre, lisible et organisee, que l'on parle
+          d'une casse simple, d'une securisation provisoire ou d'une reprise
+          plus complete.
+        </p>
+      </div>
+
+      <div class="intervention-cases-grid">
+        {
+          emergencyCases.map((item) => (
+            <article class="intervention-case-card">
+              <span class="intervention-case-card__icon">
+                <MarketingIcon name={item.icon} />
+              </span>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="signature-section" id="intervention-method" data-animate="signature">
+      <div class="signature-copy">
+        <span class="section-kicker">METHODE D'INTERVENTION</span>
+        <h2>Une methode claire pour aller vite sans improviser.</h2>
+        <p>
+          L'urgence n'empeche pas la precision. Qualification, securisation et
+          remplacement suivent une logique simple et solide.
+        </p>
+      </div>
+
+      <div class="signature-grid">
+        {
+          workSteps.map((item) => (
+            <article class="signature-card">
+              <span class="signature-card__step">{item.step}</span>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="showcase-section">
+      <div class="showcase-heading">
+        <span class="section-kicker">ENGAGEMENT CHANTIER</span>
+        <h2>Ce que vous devez retrouver apres notre passage.</h2>
+        <p>
+          Une zone plus sure, une fermeture mieux geree et une reprise
+          visuellement propre pour retrouver vite un site presentable.
+        </p>
+      </div>
+
+      <div class="intervention-commitments-grid">
+        {
+          responseCommitments.map((item) => (
+            <article class="intervention-commitment-card">
+              <span class="intervention-commitment-card__mark" aria-hidden="true"></span>
+              <p>{item}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="signature-section intervention-cta-section">
+      <div class="signature-copy">
+        <span class="section-kicker">BESOIN D'AGIR VITE</span>
         <h2>Declenchez votre demande d'intervention.</h2>
         <p>
           Donnez les dimensions, le type de vitrage et la nature du besoin pour
@@ -148,302 +293,139 @@ const workSteps = [
         </p>
       </div>
 
-      <div class="intervention-cta__actions">
-        <a class="button-link" href="/devis">Acceder au devis</a>
-        <a class="button-link button-link--secondary" href="/">Revenir a l'accueil</a>
+      <div class="intervention-cta-actions">
+        <a class="hero-button hero-button--red" href="/devis">
+          <span class="hero-button__icon">
+            <MarketingIcon name="quote" />
+          </span>
+
+          <span class="hero-button__copy">
+            <small>ACCEDER AU</small>
+            <strong>FORMULAIRE DE DEVIS</strong>
+          </span>
+        </a>
+
+        <a class="hero-button hero-button--blue" href="/">
+          <span class="hero-button__icon">
+            <MarketingIcon name="arrow" />
+          </span>
+
+          <span class="hero-button__copy">
+            <small>REVENIR A</small>
+            <strong>L'ACCUEIL</strong>
+          </span>
+        </a>
       </div>
     </section>
   </main>
 
+  <script>
+    import "../scripts/home-animations";
+  </script>
+
   <style>
-    .intervention-page {
+    .intervention-cases-grid,
+    .intervention-commitments-grid {
       display: grid;
-      gap: 1.35rem;
-    }
-
-    .intervention-hero {
-      position: relative;
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
-      gap: 1.2rem;
-      padding: clamp(1.3rem, 3vw, 2rem);
-      border-radius: 1.5rem;
-      background:
-        radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), rgba(37, 99, 235, 0) 28%),
-        linear-gradient(135deg, #eff6ff 0%, #f8fbff 48%, #dbeafe 100%);
-      border: 1px solid rgba(37, 99, 235, 0.12);
-      overflow: hidden;
-    }
-
-    .intervention-hero::after {
-      content: "";
-      position: absolute;
-      right: -5rem;
-      top: -4rem;
-      width: 14rem;
-      height: 14rem;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.35);
-      filter: blur(8px);
-      pointer-events: none;
-    }
-
-    .intervention-hero__copy,
-    .intervention-hero__panel {
-      position: relative;
-      z-index: 1;
-    }
-
-    .intervention-hero__copy h1,
-    .intervention-layout h2,
-    .intervention-cta h2 {
-      margin-bottom: 0.85rem;
-      color: #0f2f57;
-      letter-spacing: -0.04em;
-      line-height: 0.98;
-    }
-
-    .intervention-hero__lead {
-      max-width: 40rem;
-      margin-bottom: 1.1rem;
-      color: #25405f;
-      font-size: 1rem;
-      line-height: 1.7;
-    }
-
-    .intervention-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-bottom: 1rem;
-    }
-
-    .intervention-flags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.55rem;
-    }
-
-    .intervention-flags span {
-      padding: 0.55rem 0.8rem;
-      border-radius: 999px;
-      background: rgba(15, 47, 87, 0.08);
-      color: #123b72;
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .intervention-hero__panel {
-      padding: 1.2rem;
-      border-radius: 1.25rem;
-      background: rgba(15, 47, 87, 0.96);
-      color: #ffffff;
-      box-shadow: 0 20px 45px rgba(15, 47, 87, 0.18);
-    }
-
-    .intervention-panel__eyebrow {
-      margin-bottom: 0.8rem;
-      color: rgba(255, 255, 255, 0.74);
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .intervention-panel__list {
-      margin: 0;
-      padding-left: 1.15rem;
-      display: grid;
-      gap: 0.6rem;
-    }
-
-    .intervention-panel__list li,
-    .intervention-panel__note span {
-      color: rgba(255, 255, 255, 0.82);
-      line-height: 1.6;
-    }
-
-    .intervention-panel__note {
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.14);
-      display: grid;
-      gap: 0.35rem;
-    }
-
-    .intervention-panel__note strong {
-      font-size: 0.88rem;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-    }
-
-    .intervention-cases {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1rem;
+      margin-top: 1.35rem;
     }
 
-    .intervention-case {
-      display: grid;
-      gap: 0.8rem;
-      align-content: start;
-      border-radius: 1.25rem;
-      box-shadow: 0 14px 35px rgba(15, 47, 87, 0.06);
+    .intervention-cases-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    .intervention-case__icon {
+    .intervention-commitments-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .intervention-case-card,
+    .intervention-commitment-card {
+      min-height: 100%;
+      padding: 1.2rem;
+      border-radius: 1.4rem;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 18px 32px rgba(16, 49, 93, 0.08);
+    }
+
+    .intervention-case-card__icon {
       width: 3rem;
       height: 3rem;
       display: grid;
       place-items: center;
+      margin-bottom: 1rem;
       border-radius: 1rem;
-      background: #eff6ff;
-      color: #1d4ed8;
+      background: linear-gradient(135deg, rgba(35, 111, 210, 0.12), rgba(35, 111, 210, 0.18));
+      color: #165fbc;
     }
 
-    .intervention-case h2 {
+    .intervention-case-card h3 {
+      margin: 0 0 0.7rem;
+      color: #0f3a73;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .intervention-case-card p,
+    .intervention-commitment-card p {
       margin: 0;
-      color: #0f2f57;
-      font-size: 1.12rem;
-      letter-spacing: -0.03em;
+      color: #36506f;
+      line-height: 1.65;
     }
 
-    .intervention-case p {
-      margin: 0;
-    }
-
-    .intervention-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(18rem, 0.92fr);
-      gap: 1rem;
-    }
-
-    .intervention-steps,
-    .intervention-commitments {
-      border-radius: 1.25rem;
-    }
-
-    .intervention-steps__grid {
-      display: grid;
-      gap: 0.95rem;
-      margin-top: 1rem;
-    }
-
-    .intervention-step {
+    .intervention-commitment-card {
       display: grid;
       grid-template-columns: auto 1fr;
       gap: 0.85rem;
       align-items: start;
-      padding: 0.95rem 0;
-      border-top: 1px solid #e2e8f0;
     }
 
-    .intervention-step:first-child {
-      padding-top: 0;
-      border-top: none;
+    .intervention-commitment-card__mark {
+      width: 0.85rem;
+      height: 0.85rem;
+      margin-top: 0.35rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ef232b 0%, #de1820 100%);
+      box-shadow: 0 0 0 0.45rem rgba(227, 27, 35, 0.08);
     }
 
-    .intervention-step__number {
-      min-width: 2.65rem;
-      min-height: 2.65rem;
+    .intervention-commitment-card p {
+      font-weight: 600;
+    }
+
+    .signature-section {
       display: grid;
-      place-items: center;
-      border-radius: 999px;
-      background: #dbeafe;
-      color: #1d4ed8;
-      font-weight: 800;
+      grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+      gap: clamp(1rem, 2vw, 1.6rem);
+      align-items: start;
     }
 
-    .intervention-step h3 {
-      margin: 0 0 0.35rem;
-      color: #0f2f57;
-      font-size: 1rem;
+    .intervention-cta-section {
+      align-items: end;
     }
 
-    .intervention-step p {
-      margin: 0;
-    }
-
-    .intervention-commitments {
-      background: linear-gradient(180deg, #103a73 0%, #11468d 100%);
-      border-color: rgba(17, 70, 141, 0.35);
-    }
-
-    .intervention-commitments .eyebrow,
-    .intervention-commitments h2 {
-      color: #ffffff;
-    }
-
-    .intervention-commitments h2 {
-      font-size: clamp(1.55rem, 3vw, 2.25rem);
-    }
-
-    .intervention-commitments__list {
-      margin: 1rem 0 0;
-      padding-left: 1.2rem;
+    .intervention-cta-actions {
       display: grid;
-      gap: 0.7rem;
-    }
-
-    .intervention-commitments__list li {
-      color: rgba(255, 255, 255, 0.82);
-      line-height: 1.65;
-    }
-
-    .intervention-cta {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 1rem;
-      align-items: center;
-      padding: clamp(1.2rem, 2.6vw, 1.8rem);
-      border-radius: 1.35rem;
-      background: #ffffff;
-      border: 1px solid #dbe5f0;
-      box-shadow: 0 16px 34px rgba(15, 47, 87, 0.06);
-    }
-
-    .intervention-cta p {
-      margin-bottom: 0;
-    }
-
-    .intervention-cta__actions {
-      display: flex;
-      flex-wrap: wrap;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 0.75rem;
-      justify-content: flex-end;
+      width: 100%;
     }
 
     @media (max-width: 960px) {
-      .intervention-hero,
-      .intervention-layout,
-      .intervention-cta {
+      .intervention-cases-grid,
+      .intervention-commitments-grid,
+      .intervention-cta-actions {
         grid-template-columns: 1fr;
-      }
-
-      .intervention-cases {
-        grid-template-columns: 1fr;
-      }
-
-      .intervention-cta__actions {
-        justify-content: flex-start;
       }
     }
 
-    @media (max-width: 640px) {
-      .intervention-hero {
-        padding: 1rem;
-      }
-
-      .intervention-hero__lead {
-        font-size: 0.95rem;
-      }
-
-      .intervention-actions,
-      .intervention-cta__actions {
-        display: grid;
+    @media (max-width: 720px) {
+      .intervention-cases-grid,
+      .intervention-commitments-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
-</MarketingLayout>
+</BaseLayout>

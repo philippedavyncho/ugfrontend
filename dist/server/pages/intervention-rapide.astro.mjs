@@ -1,11 +1,50 @@
-import { e as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_D-0x7zcX.mjs';
+import { e as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead, g as addAttribute, l as renderScript } from '../chunks/astro/server_CDgBX6fI.mjs';
 import 'piccolore';
-import { $ as $$MarketingLayout } from '../chunks/MarketingLayout_5Pq_SZ-z.mjs';
-import { $ as $$MarketingIcon } from '../chunks/MarketingIcon_Btb0Ru1u.mjs';
+import { $ as $$BaseLayout } from '../chunks/BaseLayout_CUeo3CAb.mjs';
+import { $ as $$MarketingIcon } from '../chunks/MarketingIcon_Cpct57MY.mjs';
+/* empty css                                   */
 /* empty css                                               */
 export { renderers } from '../renderers.mjs';
 
 const $$InterventionRapide = createComponent(($$result, $$props, $$slots) => {
+  const emergencyHighlights = [
+    {
+      icon: "repair",
+      tone: "red",
+      title: "BRIS DE",
+      subtitle: "GLACE"
+    },
+    {
+      icon: "shield",
+      tone: "blue",
+      title: "MISE EN",
+      subtitle: "SECURITE"
+    },
+    {
+      icon: "glass",
+      tone: "blue",
+      title: "REPOSE",
+      subtitle: "SUR MESURE"
+    }
+  ];
+  const interventionTrustItems = [
+    {
+      icon: "clock",
+      label: "DIAGNOSTIC RAPIDE"
+    },
+    {
+      icon: "shield",
+      label: "SITE SECURISE"
+    },
+    {
+      icon: "quality",
+      label: "FINITION PROPRE"
+    },
+    {
+      icon: "people",
+      label: "PRISE EN CHARGE CLAIRE"
+    }
+  ];
   const emergencyCases = [
     {
       icon: "repair",
@@ -22,12 +61,6 @@ const $$InterventionRapide = createComponent(($$result, $$props, $$slots) => {
       title: "Vitrine et facade",
       description: "Commerce, hall ou facade vitree: remplacement et reorganisation du vitrage avec une finition propre et professionnelle."
     }
-  ];
-  const responseCommitments = [
-    "Diagnostic rapide de la casse et de la solution adaptee",
-    "Mise en securite immediate si le remplacement n'est pas possible sur place",
-    "Organisation du remplacement avec vitrage adapte au support",
-    "Finitions propres pour retrouver un site presentable rapidement"
   ];
   const workSteps = [
     {
@@ -46,14 +79,30 @@ const $$InterventionRapide = createComponent(($$result, $$props, $$slots) => {
       description: "Nous preparons la repose avec les bonnes dimensions, le bon vitrage et la bonne finition."
     }
   ];
-  return renderTemplate`${renderComponent($$result, "MarketingLayout", $$MarketingLayout, { "title": "Intervention rapide", "description": "Page dediee aux interventions rapides de vitrerie professionnelle.", "data-astro-cid-pomhtseb": true }, { "default": ($$result2) => renderTemplate` ${maybeRenderHead()}<main class="page-shell intervention-page" data-astro-cid-pomhtseb> <section class="intervention-hero" data-astro-cid-pomhtseb> <div class="intervention-hero__copy" data-astro-cid-pomhtseb> <p class="eyebrow" data-astro-cid-pomhtseb>Intervention rapide</p> <h1 data-astro-cid-pomhtseb>Une intervention vitrerie rapide, propre et organisee.</h1> <p class="intervention-hero__lead" data-astro-cid-pomhtseb>
+  const responseCommitments = [
+    "Diagnostic rapide de la casse et de la solution adaptee",
+    "Mise en securite immediate si le remplacement n'est pas possible sur place",
+    "Organisation du remplacement avec vitrage adapte au support",
+    "Finitions propres pour retrouver un site presentable rapidement"
+  ];
+  return renderTemplate`${renderComponent($$result, "BaseLayout", $$BaseLayout, { "title": "Intervention rapide", "description": "Page dediee aux interventions rapides de vitrerie professionnelle.", "data-astro-cid-pomhtseb": true }, { "default": ($$result2) => renderTemplate` ${maybeRenderHead()}<main class="home-shell" data-astro-cid-pomhtseb> <section class="hero-card" data-astro-cid-pomhtseb> <div class="hero-main" data-astro-cid-pomhtseb> <div class="hero-copy" data-astro-cid-pomhtseb> <div class="hero-copy__bg" aria-hidden="true" data-astro-cid-pomhtseb></div> <a class="brand-lockup" href="/" aria-label="Univers Glass" data-astro-cid-pomhtseb> <svg viewBox="0 0 54 74" aria-hidden="true" data-astro-cid-pomhtseb> <path d="M7 7.5 28 1v65L7 72.5Z" fill="none" stroke="currentColor" stroke-width="5" data-astro-cid-pomhtseb></path> <path d="M34 7.5 47 4v64l-13 3.5Z" fill="currentColor" data-astro-cid-pomhtseb></path> </svg> <span class="brand-copy" data-astro-cid-pomhtseb> <strong data-astro-cid-pomhtseb>UNIVERS GLASS</strong> <span data-astro-cid-pomhtseb>LA TRANSPARENCE AU SERVICE DE VOS PROJETS</span> </span> </a> <h1 class="hero-title" data-astro-cid-pomhtseb> <span data-astro-cid-pomhtseb>INTERVENTION</span> <span class="hero-title--accent" data-astro-cid-pomhtseb>RAPIDE ET</span> <span data-astro-cid-pomhtseb>PROPRE</span> </h1> <span class="hero-rule" aria-hidden="true" data-astro-cid-pomhtseb></span> <p class="hero-description" data-astro-cid-pomhtseb>
 En cas de casse, de vitrage fragilise ou de facade a securiser, nous
-          intervenons avec une logique simple: proteger vite, remplacer juste
-          et remettre le site en ordre avec une finition serieuse.
-</p> <div class="intervention-actions" data-astro-cid-pomhtseb> <a class="button-link" href="/devis" data-astro-cid-pomhtseb>Demander une intervention</a> <a class="button-link button-link--secondary" href="/" data-astro-cid-pomhtseb>Retour a l'accueil</a> </div> <div class="intervention-flags" aria-label="Points forts" data-astro-cid-pomhtseb> <span data-astro-cid-pomhtseb>Urgence</span> <span data-astro-cid-pomhtseb>Mise en securite</span> <span data-astro-cid-pomhtseb>Remplacement sur mesure</span> </div> </div> <aside class="intervention-hero__panel" data-astro-cid-pomhtseb> <p class="intervention-panel__eyebrow" data-astro-cid-pomhtseb>Ce que nous prenons en charge</p> <ul class="intervention-panel__list" data-astro-cid-pomhtseb> <li data-astro-cid-pomhtseb>Fenetres cassees ou fissurees</li> <li data-astro-cid-pomhtseb>Vitrines de commerce endommagees</li> <li data-astro-cid-pomhtseb>Baies vitrees a remettre en securite</li> <li data-astro-cid-pomhtseb>Parois et ensembles vitres a remplacer</li> </ul> <div class="intervention-panel__note" data-astro-cid-pomhtseb> <strong data-astro-cid-pomhtseb>Objectif:</strong> <span data-astro-cid-pomhtseb>retablir vite la securite, la fermeture et une presentation propre du site.</span> </div> </aside> </section> <section class="intervention-cases" data-astro-cid-pomhtseb> ${emergencyCases.map((item) => renderTemplate`<article class="intervention-case page-card" data-astro-cid-pomhtseb> <span class="intervention-case__icon" data-astro-cid-pomhtseb> ${renderComponent($$result2, "MarketingIcon", $$MarketingIcon, { "name": item.icon, "data-astro-cid-pomhtseb": true })} </span> <h2 data-astro-cid-pomhtseb>${item.title}</h2> <p data-astro-cid-pomhtseb>${item.description}</p> </article>`)} </section> <section class="intervention-layout" data-astro-cid-pomhtseb> <article class="page-card intervention-steps" data-astro-cid-pomhtseb> <p class="eyebrow" data-astro-cid-pomhtseb>Deroule d'intervention</p> <h2 data-astro-cid-pomhtseb>Une methode claire pour aller vite sans improviser.</h2> <div class="intervention-steps__grid" data-astro-cid-pomhtseb> ${workSteps.map((item) => renderTemplate`<div class="intervention-step" data-astro-cid-pomhtseb> <span class="intervention-step__number" data-astro-cid-pomhtseb>${item.step}</span> <div data-astro-cid-pomhtseb> <h3 data-astro-cid-pomhtseb>${item.title}</h3> <p data-astro-cid-pomhtseb>${item.description}</p> </div> </div>`)} </div> </article> <aside class="page-card intervention-commitments" data-astro-cid-pomhtseb> <p class="eyebrow" data-astro-cid-pomhtseb>Engagement chantier</p> <h2 data-astro-cid-pomhtseb>Ce que vous devez retrouver apres notre passage.</h2> <ul class="intervention-commitments__list" data-astro-cid-pomhtseb> ${responseCommitments.map((item) => renderTemplate`<li data-astro-cid-pomhtseb>${item}</li>`)} </ul> </aside> </section> <section class="intervention-cta" data-astro-cid-pomhtseb> <div data-astro-cid-pomhtseb> <p class="eyebrow" data-astro-cid-pomhtseb>Besoin d'agir vite</p> <h2 data-astro-cid-pomhtseb>Declenchez votre demande d'intervention.</h2> <p data-astro-cid-pomhtseb>
+            intervenons pour proteger vite, remettre en securite et relancer une
+            finition serieuse.
+</p> <div class="feature-list" data-astro-cid-pomhtseb> ${emergencyHighlights.map((feature) => renderTemplate`<div${addAttribute(`feature-item feature-item--${feature.tone}`, "class")} data-astro-cid-pomhtseb> <span class="feature-item__icon" data-astro-cid-pomhtseb> ${renderComponent($$result2, "MarketingIcon", $$MarketingIcon, { "name": feature.icon, "data-astro-cid-pomhtseb": true })} </span> <span class="feature-item__copy" data-astro-cid-pomhtseb> <span data-astro-cid-pomhtseb>${feature.title}</span> <span data-astro-cid-pomhtseb>${feature.subtitle}</span> </span> </div>`)} </div> <div class="hero-actions" data-astro-cid-pomhtseb> <a class="hero-button hero-button--red" href="/devis" data-astro-cid-pomhtseb> <span class="hero-button__icon" data-astro-cid-pomhtseb> ${renderComponent($$result2, "MarketingIcon", $$MarketingIcon, { "name": "arrow", "data-astro-cid-pomhtseb": true })} </span> <span class="hero-button__copy" data-astro-cid-pomhtseb> <small data-astro-cid-pomhtseb>DECLENCHER UNE</small> <strong data-astro-cid-pomhtseb>DEMANDE D'INTERVENTION</strong> </span> </a> <a class="hero-button hero-button--blue" href="#intervention-method" data-astro-cid-pomhtseb> <span class="hero-button__icon" data-astro-cid-pomhtseb> ${renderComponent($$result2, "MarketingIcon", $$MarketingIcon, { "name": "shield", "data-astro-cid-pomhtseb": true })} </span> <span class="hero-button__copy" data-astro-cid-pomhtseb> <small data-astro-cid-pomhtseb>VOIR LA</small> <strong data-astro-cid-pomhtseb>METHODE D'INTERVENTION</strong> </span> </a> </div> </div> <div class="hero-media" data-astro-cid-pomhtseb> <img src="/fonds.png" alt="Facade vitree moderne a remettre rapidement en securite" loading="eager" data-astro-cid-pomhtseb> </div> </div> <div class="hero-bottom" data-astro-cid-pomhtseb> <div class="hero-bottom__items" data-astro-cid-pomhtseb> ${interventionTrustItems.map((item) => renderTemplate`<div class="trust-item" data-astro-cid-pomhtseb> <span class="trust-item__icon" data-astro-cid-pomhtseb> ${renderComponent($$result2, "MarketingIcon", $$MarketingIcon, { "name": item.icon, "data-astro-cid-pomhtseb": true })} </span> <span class="trust-item__label" data-astro-cid-pomhtseb>${item.label}</span> </div>`)} </div> <a class="contact-panel" href="/contact" data-astro-cid-pomhtseb> <span class="contact-panel__icon" data-astro-cid-pomhtseb> ${renderComponent($$result2, "MarketingIcon", $$MarketingIcon, { "name": "mail", "data-astro-cid-pomhtseb": true })} </span> <span class="contact-panel__copy" data-astro-cid-pomhtseb> <strong data-astro-cid-pomhtseb>CONTACTEZ-NOUS</strong> <small data-astro-cid-pomhtseb>Detaillez l'urgence et la prise en charge souhaitee</small> </span> </a> </div> </section> <section class="showcase-section" data-animate="showcase" data-astro-cid-pomhtseb> <div class="showcase-heading" data-astro-cid-pomhtseb> <span class="section-kicker" data-astro-cid-pomhtseb>CAS PRIS EN CHARGE</span> <h2 data-astro-cid-pomhtseb>Des urgences traitees avec la meme tenue visuelle que la home.</h2> <p data-astro-cid-pomhtseb>
+Chaque intervention reste cadre, lisible et organisee, que l'on parle
+          d'une casse simple, d'une securisation provisoire ou d'une reprise
+          plus complete.
+</p> </div> <div class="intervention-cases-grid" data-astro-cid-pomhtseb> ${emergencyCases.map((item) => renderTemplate`<article class="intervention-case-card" data-astro-cid-pomhtseb> <span class="intervention-case-card__icon" data-astro-cid-pomhtseb> ${renderComponent($$result2, "MarketingIcon", $$MarketingIcon, { "name": item.icon, "data-astro-cid-pomhtseb": true })} </span> <h3 data-astro-cid-pomhtseb>${item.title}</h3> <p data-astro-cid-pomhtseb>${item.description}</p> </article>`)} </div> </section> <section class="signature-section" id="intervention-method" data-animate="signature" data-astro-cid-pomhtseb> <div class="signature-copy" data-astro-cid-pomhtseb> <span class="section-kicker" data-astro-cid-pomhtseb>METHODE D'INTERVENTION</span> <h2 data-astro-cid-pomhtseb>Une methode claire pour aller vite sans improviser.</h2> <p data-astro-cid-pomhtseb>
+L'urgence n'empeche pas la precision. Qualification, securisation et
+          remplacement suivent une logique simple et solide.
+</p> </div> <div class="signature-grid" data-astro-cid-pomhtseb> ${workSteps.map((item) => renderTemplate`<article class="signature-card" data-astro-cid-pomhtseb> <span class="signature-card__step" data-astro-cid-pomhtseb>${item.step}</span> <h3 data-astro-cid-pomhtseb>${item.title}</h3> <p data-astro-cid-pomhtseb>${item.description}</p> </article>`)} </div> </section> <section class="showcase-section" data-astro-cid-pomhtseb> <div class="showcase-heading" data-astro-cid-pomhtseb> <span class="section-kicker" data-astro-cid-pomhtseb>ENGAGEMENT CHANTIER</span> <h2 data-astro-cid-pomhtseb>Ce que vous devez retrouver apres notre passage.</h2> <p data-astro-cid-pomhtseb>
+Une zone plus sure, une fermeture mieux geree et une reprise
+          visuellement propre pour retrouver vite un site presentable.
+</p> </div> <div class="intervention-commitments-grid" data-astro-cid-pomhtseb> ${responseCommitments.map((item) => renderTemplate`<article class="intervention-commitment-card" data-astro-cid-pomhtseb> <span class="intervention-commitment-card__mark" aria-hidden="true" data-astro-cid-pomhtseb></span> <p data-astro-cid-pomhtseb>${item}</p> </article>`)} </div> </section> <section class="signature-section intervention-cta-section" data-astro-cid-pomhtseb> <div class="signature-copy" data-astro-cid-pomhtseb> <span class="section-kicker" data-astro-cid-pomhtseb>BESOIN D'AGIR VITE</span> <h2 data-astro-cid-pomhtseb>Declenchez votre demande d'intervention.</h2> <p data-astro-cid-pomhtseb>
 Donnez les dimensions, le type de vitrage et la nature du besoin pour
           lancer la prise en charge dans de bonnes conditions.
-</p> </div> <div class="intervention-cta__actions" data-astro-cid-pomhtseb> <a class="button-link" href="/devis" data-astro-cid-pomhtseb>Acceder au devis</a> <a class="button-link button-link--secondary" href="/" data-astro-cid-pomhtseb>Revenir a l'accueil</a> </div> </section> </main>  ` })}`;
+</p> </div> <div class="intervention-cta-actions" data-astro-cid-pomhtseb> <a class="hero-button hero-button--red" href="/devis" data-astro-cid-pomhtseb> <span class="hero-button__icon" data-astro-cid-pomhtseb> ${renderComponent($$result2, "MarketingIcon", $$MarketingIcon, { "name": "quote", "data-astro-cid-pomhtseb": true })} </span> <span class="hero-button__copy" data-astro-cid-pomhtseb> <small data-astro-cid-pomhtseb>ACCEDER AU</small> <strong data-astro-cid-pomhtseb>FORMULAIRE DE DEVIS</strong> </span> </a> <a class="hero-button hero-button--blue" href="/" data-astro-cid-pomhtseb> <span class="hero-button__icon" data-astro-cid-pomhtseb> ${renderComponent($$result2, "MarketingIcon", $$MarketingIcon, { "name": "arrow", "data-astro-cid-pomhtseb": true })} </span> <span class="hero-button__copy" data-astro-cid-pomhtseb> <small data-astro-cid-pomhtseb>REVENIR A</small> <strong data-astro-cid-pomhtseb>L'ACCUEIL</strong> </span> </a> </div> </section> </main> ${renderScript($$result2, "C:/Users/EMMA/ug/frontend/src/pages/intervention-rapide.astro?astro&type=script&index=0&lang.ts")}  ` })}`;
 }, "C:/Users/EMMA/ug/frontend/src/pages/intervention-rapide.astro", void 0);
 
 const $$file = "C:/Users/EMMA/ug/frontend/src/pages/intervention-rapide.astro";
