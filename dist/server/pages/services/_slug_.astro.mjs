@@ -1,6 +1,6 @@
-import { e as createComponent, k as renderComponent, r as renderTemplate, h as createAstro, m as maybeRenderHead } from '../../chunks/astro/server_CDgBX6fI.mjs';
+import { e as createComponent, k as renderComponent, r as renderTemplate, h as createAstro, m as maybeRenderHead } from '../../chunks/astro/server_0AjLyGG5.mjs';
 import 'piccolore';
-import { $ as $$MarketingLayout } from '../../chunks/MarketingLayout_BzKJmFUZ.mjs';
+import { $ as $$MarketingLayout } from '../../chunks/MarketingLayout_C49Zx_LJ.mjs';
 /* empty css                                     */
 export { renderers } from '../../renderers.mjs';
 
@@ -34,9 +34,9 @@ Cette page peut servir de point d'entree SEO ou commercial pour
           presenter un service precis avec un discours plus metier, plus clair
           et mieux cadre pour la prise de contact.
 </p> <div class="actions" data-astro-cid-tcy35dad> <a class="button-link" href="/devis" data-astro-cid-tcy35dad>Demander un devis</a> <a class="button-link button-link--secondary" href="/intervention-rapide" data-astro-cid-tcy35dad>Voir l'intervention rapide</a> </div> </div> <aside class="service-hero__panel" data-astro-cid-tcy35dad> <p class="eyebrow" data-astro-cid-tcy35dad>Point de controle</p> <ul data-astro-cid-tcy35dad> ${servicePoints.map((item) => renderTemplate`<li data-astro-cid-tcy35dad>${item}</li>`)} </ul> </aside> </section> <section class="service-grid" data-astro-cid-tcy35dad> ${serviceBenefits.map((item) => renderTemplate`<article class="page-card service-card" data-astro-cid-tcy35dad> <h2 data-astro-cid-tcy35dad>${item.title}</h2> <p data-astro-cid-tcy35dad>${item.description}</p> </article>`)} </section> </main>  ` })}`;
-}, "C:/Users/EMMA/ug/frontend/src/pages/services/[slug].astro", void 0);
+}, "C:/Users/EMMA/ug/ugfrontend/src/pages/services/[slug].astro", void 0);
 
-const $$file = "C:/Users/EMMA/ug/frontend/src/pages/services/[slug].astro";
+const $$file = "C:/Users/EMMA/ug/ugfrontend/src/pages/services/[slug].astro";
 const $$url = "/services/[slug]";
 
 const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({

@@ -2,7 +2,7 @@ export { renderers } from '../../renderers.mjs';
 
 const prerender = false;
 const backendBaseUrl = "http://127.0.0.1:8000/api";
-const proxyRequest = async ({ params, request, url }) => {
+const proxyRequest = async ({ request, url }) => {
   const proxyPath = url.pathname.replace(/^\/api\/?/, "");
   const normalizedBase = backendBaseUrl.endsWith("/") ? backendBaseUrl : `${backendBaseUrl}/`;
   const targetUrl = new URL(`${proxyPath}${url.search}`, normalizedBase);
@@ -11,6 +11,10 @@ const proxyRequest = async ({ params, request, url }) => {
   headers.delete("content-length");
   headers.delete("expect");
   headers.delete("connection");
+  headers.delete("origin");
+  headers.delete("referer");
+  headers.delete("cookie");
+  headers.delete("x-csrftoken");
   const response = await fetch(targetUrl, {
     method: request.method,
     headers,

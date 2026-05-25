@@ -1,6 +1,6 @@
-import { e as createComponent, k as renderComponent, r as renderTemplate, h as createAstro, m as maybeRenderHead } from '../../chunks/astro/server_CDgBX6fI.mjs';
+import { e as createComponent, k as renderComponent, r as renderTemplate, h as createAstro, m as maybeRenderHead } from '../../chunks/astro/server_0AjLyGG5.mjs';
 import 'piccolore';
-import { $ as $$MarketingLayout } from '../../chunks/MarketingLayout_BzKJmFUZ.mjs';
+import { $ as $$MarketingLayout } from '../../chunks/MarketingLayout_C49Zx_LJ.mjs';
 /* empty css                                     */
 export { renderers } from '../../renderers.mjs';
 
@@ -34,9 +34,9 @@ Cette page peut accueillir un contenu local plus detaille pour capter
           les demandes de vitrerie dans une ville precise tout en gardant une
           image propre, technique et rassurante.
 </p> <div class="actions" data-astro-cid-2a4bxvgd> <a class="button-link" href="/devis" data-astro-cid-2a4bxvgd>Demander un devis</a> <a class="button-link button-link--secondary" href="/intervention-rapide" data-astro-cid-2a4bxvgd>Intervention rapide</a> </div> </div> <aside class="zone-hero__panel" data-astro-cid-2a4bxvgd> <p class="eyebrow" data-astro-cid-2a4bxvgd>Promesse locale</p> <ul data-astro-cid-2a4bxvgd> ${localPromises.map((item) => renderTemplate`<li data-astro-cid-2a4bxvgd>${item}</li>`)} </ul> </aside> </section> <section class="zone-grid" data-astro-cid-2a4bxvgd> ${localCards.map((item) => renderTemplate`<article class="page-card zone-card" data-astro-cid-2a4bxvgd> <h2 data-astro-cid-2a4bxvgd>${item.title}</h2> <p data-astro-cid-2a4bxvgd>${item.description}</p> </article>`)} </section> </main>  ` })}`;
-}, "C:/Users/EMMA/ug/frontend/src/pages/zones/[city].astro", void 0);
+}, "C:/Users/EMMA/ug/ugfrontend/src/pages/zones/[city].astro", void 0);
 
-const $$file = "C:/Users/EMMA/ug/frontend/src/pages/zones/[city].astro";
+const $$file = "C:/Users/EMMA/ug/ugfrontend/src/pages/zones/[city].astro";
 const $$url = "/zones/[city]";
 
 const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({

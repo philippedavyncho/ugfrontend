@@ -1,6 +1,6 @@
-import { e as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead } from '../../chunks/astro/server_CDgBX6fI.mjs';
+import { e as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead } from '../../chunks/astro/server_0AjLyGG5.mjs';
 import 'piccolore';
-import { $ as $$MarketingLayout } from '../../chunks/MarketingLayout_BzKJmFUZ.mjs';
+import { $ as $$MarketingLayout } from '../../chunks/MarketingLayout_C49Zx_LJ.mjs';
 /* empty css                                    */
 export { renderers } from '../../renderers.mjs';
 
@@ -14,9 +14,9 @@ const $$Merci = createComponent(($$result, $$props, $$slots) => {
 Le besoin est maintenant pose dans le bon cadre. La suite consiste a
           verifier les informations utiles et a revenir avec une reponse claire.
 </p> <div class="actions" data-astro-cid-tqmpshr5> <a class="button-link" href="/" data-astro-cid-tqmpshr5>Retour a l'accueil</a> <a class="button-link button-link--secondary" href="/devis" data-astro-cid-tqmpshr5>Faire un autre devis</a> </div> </div> <aside class="thank-you-hero__panel" data-astro-cid-tqmpshr5> <p class="eyebrow" data-astro-cid-tqmpshr5>Suite logique</p> <ul data-astro-cid-tqmpshr5> ${nextSteps.map((item) => renderTemplate`<li data-astro-cid-tqmpshr5>${item}</li>`)} </ul> </aside> </section> </main>  ` })}`;
-}, "C:/Users/EMMA/ug/frontend/src/pages/devis/merci.astro", void 0);
+}, "C:/Users/EMMA/ug/ugfrontend/src/pages/devis/merci.astro", void 0);
 
-const $$file = "C:/Users/EMMA/ug/frontend/src/pages/devis/merci.astro";
+const $$file = "C:/Users/EMMA/ug/ugfrontend/src/pages/devis/merci.astro";
 const $$url = "/devis/merci";
 
 const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({

@@ -4,6 +4,8 @@ import MarketingIcon from "../../components/ui/MarketingIcon.astro";
 import "../../styles/univers-glass-pages.css";
 
 const apiBaseUrl = "/api";
+const apiFallbackBaseUrl =
+  import.meta.env.PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000/api";
 
 const quoteHighlights = [
   {
@@ -24,14 +26,14 @@ const quoteHighlights = [
     title: "DEVIS",
     subtitle: "CLAIR"
   }
-] as const;
+];
 
 const quoteChecklist = [
   "Dimensions utiles de l'ouverture",
   "Type de vitrage souhaite",
   "Prestation exacte a realiser",
   "Options ou niveau de performance vise"
-] as const;
+];
 
 const quoteProcess = [
   {
@@ -52,7 +54,7 @@ const quoteProcess = [
     description:
       "Le resultat devient une base claire pour enchainer vers une demande plus precise ou une urgence."
   }
-] as const;
+];
 
 const quoteBenefits = [
   {
@@ -73,7 +75,7 @@ const quoteBenefits = [
     description:
       "Le resultat devient une base claire pour avancer rapidement sur une vraie demande."
   }
-] as const;
+];
 
 const quoteTrustItems = [
   {
@@ -92,7 +94,7 @@ const quoteTrustItems = [
     icon: "people",
     label: "RESULTAT CLAIR"
   }
-] as const;
+];
 ---
 
 <BaseLayout
@@ -100,7 +102,11 @@ const quoteTrustItems = [
   description="Calculez une estimation claire pour votre projet vitrerie."
 >
   <main class="home-shell">
-    <section class="hero-card quote-page" data-api-base={apiBaseUrl}>
+    <section
+      class="hero-card quote-page"
+      data-api-base={apiBaseUrl}
+      data-api-fallback-base={apiFallbackBaseUrl}
+    >
       <div class="hero-main">
         <div class="hero-copy">
           <div class="hero-copy__bg" aria-hidden="true"></div>
@@ -278,7 +284,7 @@ const quoteTrustItems = [
             <span class="section-kicker">FORMULAIRE</span>
             <h3>Caracteristiques du vitrage</h3>
             <p>
-              Largeur, hauteur, type de vitrage, epaisseur, prestation et
+              Largeur, hauteur, type de vitrage, epaisseur, prestations et
               options.
             </p>
           </div>
@@ -311,13 +317,12 @@ const quoteTrustItems = [
                 </select>
               </label>
 
-              <label class="field field--wide">
-                <span>Type de prestation</span>
-                <select name="work_type" data-role="work-type" required disabled>
-                  <option>Chargement...</option>
-                </select>
-              </label>
             </div>
+
+            <fieldset class="options" data-role="work-types-group" disabled>
+              <legend>Types de prestation</legend>
+              <div class="options__grid" data-role="work-types"></div>
+            </fieldset>
 
             <fieldset class="options" data-role="options-group" disabled>
               <legend>Options</legend>
@@ -434,26 +439,31 @@ const quoteTrustItems = [
 
   <script is:inline>
     (() => {
-      const root = document.querySelector(".quote-page");
-      if (!root) return;
+      const quoteRoot = document.querySelector(".quote-page");
+      if (!quoteRoot) return;
 
-      const apiBase = root.dataset.apiBase?.replace(/\/$/, "") || "";
-      const status = root.querySelector('[data-role="status"]');
-      const form = root.querySelector('[data-role="form"]');
-      const submitButton = root.querySelector('[data-role="submit"]');
-      const glassTypeSelect = root.querySelector('[data-role="glass-type"]');
-      const thicknessSelect = root.querySelector('[data-role="thickness"]');
-      const workTypeSelect = root.querySelector('[data-role="work-type"]');
-      const optionsWrapper = root.querySelector('[data-role="options"]');
-      const optionsGroup = root.querySelector('[data-role="options-group"]');
-      const placeholder = root.querySelector('[data-role="placeholder"]');
-      const resultPanel = root.querySelector('[data-role="result"]');
-      const totalPrice = root.querySelector('[data-role="total-price"]');
-      const area = root.querySelector('[data-role="area"]');
-      const glassCost = root.querySelector('[data-role="glass-cost"]');
-      const workCost = root.querySelector('[data-role="work-cost"]');
-      const optionsCost = root.querySelector('[data-role="options-cost"]');
-      const breakdown = root.querySelector('[data-role="breakdown"]');
+      const normalizeApiBase = (value) => value?.replace(/\/$/, "") || "";
+      const apiBase = normalizeApiBase(quoteRoot.dataset.apiBase);
+      const apiFallbackBase = normalizeApiBase(quoteRoot.dataset.apiFallbackBase);
+      const apiBases = Array.from(new Set([apiBase, apiFallbackBase].filter(Boolean)));
+      let activeApiBase = apiBases[0] || "";
+      const status = document.querySelector('[data-role="status"]');
+      const form = document.querySelector('[data-role="form"]');
+      const submitButton = document.querySelector('[data-role="submit"]');
+      const glassTypeSelect = document.querySelector('[data-role="glass-type"]');
+      const thicknessSelect = document.querySelector('[data-role="thickness"]');
+      const workTypesWrapper = document.querySelector('[data-role="work-types"]');
+      const workTypesGroup = document.querySelector('[data-role="work-types-group"]');
+      const optionsWrapper = document.querySelector('[data-role="options"]');
+      const optionsGroup = document.querySelector('[data-role="options-group"]');
+      const placeholder = document.querySelector('[data-role="placeholder"]');
+      const resultPanel = document.querySelector('[data-role="result"]');
+      const totalPrice = document.querySelector('[data-role="total-price"]');
+      const area = document.querySelector('[data-role="area"]');
+      const glassCost = document.querySelector('[data-role="glass-cost"]');
+      const workCost = document.querySelector('[data-role="work-cost"]');
+      const optionsCost = document.querySelector('[data-role="options-cost"]');
+      const breakdown = document.querySelector('[data-role="breakdown"]');
 
       const setStatus = (message, type = "info") => {
         if (!status) return;
@@ -470,6 +480,28 @@ const quoteTrustItems = [
         select.appendChild(option);
       };
 
+      const selectFirstAvailableOption = (select) => {
+        if (!select || select.options.length < 2) return false;
+        select.selectedIndex = 1;
+        return true;
+      };
+
+      const createCheckboxItem = (name, value, labelText) => {
+        const label = document.createElement("label");
+        label.className = "option-item";
+
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.name = name;
+        input.value = String(value);
+
+        const text = document.createElement("span");
+        text.textContent = labelText;
+
+        label.append(input, text);
+        return label;
+      };
+
       const money = (value, currency) => {
         const amount = Number.parseFloat(value);
         if (Number.isNaN(amount)) return `${value} ${currency}`;
@@ -479,10 +511,58 @@ const quoteTrustItems = [
         })} ${currency}`;
       };
 
+      const flattenErrors = (value) => {
+        if (Array.isArray(value)) {
+          return value.flatMap((item) => flattenErrors(item));
+        }
+
+        if (value && typeof value === "object") {
+          return Object.values(value).flatMap((item) => flattenErrors(item));
+        }
+
+        if (typeof value === "string") {
+          return [value];
+        }
+
+        return [];
+      };
+
+      const getErrorMessage = (payload) => {
+        const messages = flattenErrors(payload).filter(Boolean);
+        return messages[0] || "Le calcul a echoue. Verifiez les champs ou la disponibilite du backend.";
+      };
+
+      const requestApi = async (path, options) => {
+        const preferredBases = activeApiBase
+          ? [activeApiBase, ...apiBases.filter((base) => base !== activeApiBase)]
+          : apiBases;
+        let lastResponse = null;
+        let lastError = null;
+
+        for (const base of preferredBases) {
+          try {
+            const response = await fetch(`${base}${path}`, options);
+            if (response.ok) {
+              activeApiBase = base;
+              return response;
+            }
+
+            lastResponse = response;
+            if (response.status !== 404 && response.status < 500) {
+              return response;
+            }
+          } catch (error) {
+            lastError = error;
+          }
+        }
+
+        if (lastResponse) return lastResponse;
+        throw lastError ?? new Error("Aucune route API disponible.");
+      };
+
       const renderConfig = (config) => {
         clearSelect(glassTypeSelect, "Choisir un vitrage");
         clearSelect(thicknessSelect, "Choisir une epaisseur");
-        clearSelect(workTypeSelect, "Choisir une prestation");
 
         config.glass_types.forEach((item) => {
           const option = document.createElement("option");
@@ -498,36 +578,45 @@ const quoteTrustItems = [
           thicknessSelect.appendChild(option);
         });
 
+        workTypesWrapper.innerHTML = "";
         config.work_types.forEach((item) => {
-          const option = document.createElement("option");
-          option.value = item.id;
-          option.textContent = `${item.name} (${money(item.price, config.currency)})`;
-          workTypeSelect.appendChild(option);
+          workTypesWrapper.appendChild(
+            createCheckboxItem(
+              "work_types",
+              item.id,
+              `${item.name} (${money(item.price, config.currency)})`
+            )
+          );
         });
 
         optionsWrapper.innerHTML = "";
         config.options.forEach((item) => {
-          const label = document.createElement("label");
-          label.className = "option-item";
-
-          const input = document.createElement("input");
-          input.type = "checkbox";
-          input.name = "options";
-          input.value = String(item.id);
-
-          const text = document.createElement("span");
-          text.textContent = `${item.name} (${money(item.price, config.currency)})`;
-
-          label.append(input, text);
-          optionsWrapper.appendChild(label);
+          optionsWrapper.appendChild(
+            createCheckboxItem(
+              "options",
+              item.id,
+              `${item.name} (${money(item.price, config.currency)})`
+            )
+          );
         });
+
+        const hasGlassType = selectFirstAvailableOption(glassTypeSelect);
+        const hasThickness = selectFirstAvailableOption(thicknessSelect);
+        const hasWorkTypes = config.work_types.length > 0;
+        const isReady = hasGlassType && hasThickness && hasWorkTypes;
 
         glassTypeSelect.disabled = false;
         thicknessSelect.disabled = false;
-        workTypeSelect.disabled = false;
+        workTypesGroup.disabled = false;
         optionsGroup.disabled = false;
-        submitButton.disabled = false;
-        setStatus("Configuration chargee. Vous pouvez calculer un devis.", "success");
+        submitButton.disabled = !isReady;
+
+        if (!isReady) {
+          setStatus("Configuration incomplete: le backend ne renvoie pas toutes les valeurs necessaires.", "error");
+          return;
+        }
+
+        setStatus("Configuration chargee depuis le backend. Vous pouvez calculer un devis.", "success");
       };
 
       const renderResult = (result) => {
@@ -550,7 +639,7 @@ const quoteTrustItems = [
       const loadConfig = async () => {
         try {
           setStatus("Chargement de la configuration...", "info");
-          const response = await fetch(`${apiBase}/config/`);
+          const response = await requestApi("/config/");
           if (!response.ok) throw new Error(`Erreur ${response.status}`);
           const config = await response.json();
           renderConfig(config);
@@ -566,18 +655,28 @@ const quoteTrustItems = [
         setStatus("Calcul du devis en cours...", "info");
 
         const formData = new FormData(form);
+        const selectedWorkTypes = formData
+          .getAll("work_types")
+          .map((value) => Number(value));
+
+        if (!selectedWorkTypes.length) {
+          setStatus("Selectionnez au moins une prestation pour calculer le devis.", "error");
+          submitButton.disabled = false;
+          return;
+        }
+
         const payload = {
           width: formData.get("width"),
           height: formData.get("height"),
           glass_type: Number(formData.get("glass_type")),
           thickness: Number(formData.get("thickness")),
-          work_type: Number(formData.get("work_type")),
+          work_types: selectedWorkTypes,
           options: formData.getAll("options").map((value) => Number(value)),
           holes: []
         };
 
         try {
-          const response = await fetch(`${apiBase}/quote/`, {
+          const response = await requestApi("/quote-request/", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -587,15 +686,14 @@ const quoteTrustItems = [
 
           const data = await response.json();
           if (!response.ok) {
-            const firstError = JSON.stringify(data);
-            throw new Error(firstError);
+            throw new Error(getErrorMessage(data));
           }
 
           renderResult(data);
-          setStatus("Devis calcule avec succes.", "success");
+          setStatus("Devis calcule et enregistre avec succes.", "success");
         } catch (error) {
           console.error(error);
-          setStatus("Le calcul a echoue. Verifiez les champs ou la disponibilite du backend.", "error");
+          setStatus(error instanceof Error ? error.message : "Le calcul a echoue. Verifiez les champs ou la disponibilite du backend.", "error");
         } finally {
           submitButton.disabled = false;
         }

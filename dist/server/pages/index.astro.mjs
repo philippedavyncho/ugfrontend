@@ -1,7 +1,7 @@
-import { e as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead, g as addAttribute, l as renderScript } from '../chunks/astro/server_CDgBX6fI.mjs';
+import { e as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead, g as addAttribute, l as renderScript } from '../chunks/astro/server_0AjLyGG5.mjs';
 import 'piccolore';
-import { $ as $$BaseLayout } from '../chunks/BaseLayout_CUeo3CAb.mjs';
-import { $ as $$MarketingIcon } from '../chunks/MarketingIcon_Cpct57MY.mjs';
+import { $ as $$BaseLayout } from '../chunks/BaseLayout_CmUaiSs0.mjs';
+import { $ as $$MarketingIcon } from '../chunks/MarketingIcon_TLWSRWAh.mjs';
 /* empty css                                 */
 export { renderers } from '../renderers.mjs';
 
@@ -110,10 +110,10 @@ Specialiste en vitrerie moderne : installation, reparation et sur
 Vitrage isolant, remplacement apres casse, pose sur mesure et mise en
           securite: chaque intervention vise la precision, la durabilite et la
           qualite de finition.
-</p> </div> <div class="signature-grid" data-astro-cid-j7pv25f6> ${serviceFocus.map((item) => renderTemplate`<article class="signature-card" data-lift-card data-astro-cid-j7pv25f6> <span class="signature-card__icon" data-astro-cid-j7pv25f6> ${renderComponent($$result2, "MarketingIcon", $$MarketingIcon, { "name": item.icon, "data-astro-cid-j7pv25f6": true })} </span> <h3 data-astro-cid-j7pv25f6>${item.title}</h3> <p data-astro-cid-j7pv25f6>${item.description}</p> </article>`)} </div> </section> </main> ${renderScript($$result2, "C:/Users/EMMA/ug/frontend/src/pages/index.astro?astro&type=script&index=0&lang.ts")}  ` })}`;
-}, "C:/Users/EMMA/ug/frontend/src/pages/index.astro", void 0);
+</p> </div> <div class="signature-grid" data-astro-cid-j7pv25f6> ${serviceFocus.map((item) => renderTemplate`<article class="signature-card" data-lift-card data-astro-cid-j7pv25f6> <span class="signature-card__icon" data-astro-cid-j7pv25f6> ${renderComponent($$result2, "MarketingIcon", $$MarketingIcon, { "name": item.icon, "data-astro-cid-j7pv25f6": true })} </span> <h3 data-astro-cid-j7pv25f6>${item.title}</h3> <p data-astro-cid-j7pv25f6>${item.description}</p> </article>`)} </div> </section> </main> ${renderScript($$result2, "C:/Users/EMMA/ug/ugfrontend/src/pages/index.astro?astro&type=script&index=0&lang.ts")}  ` })}`;
+}, "C:/Users/EMMA/ug/ugfrontend/src/pages/index.astro", void 0);
 
-const $$file = "C:/Users/EMMA/ug/frontend/src/pages/index.astro";
+const $$file = "C:/Users/EMMA/ug/ugfrontend/src/pages/index.astro";
 const $$url = "";
 
 const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({

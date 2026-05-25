@@ -1,6 +1,6 @@
-import { e as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead, g as addAttribute } from '../chunks/astro/server_CDgBX6fI.mjs';
+import { e as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead, g as addAttribute } from '../chunks/astro/server_0AjLyGG5.mjs';
 import 'piccolore';
-import { $ as $$MarketingLayout } from '../chunks/MarketingLayout_BzKJmFUZ.mjs';
+import { $ as $$MarketingLayout } from '../chunks/MarketingLayout_C49Zx_LJ.mjs';
 /* empty css                               */
 export { renderers } from '../renderers.mjs';
 
@@ -26,9 +26,9 @@ const $$404 = createComponent(($$result, $$props, $$slots) => {
 Le lien est peut-etre ancien, incomplet ou la page a simplement ete
           deplacee. Le plus simple est de repartir sur une entree propre.
 </p> <div class="actions" data-astro-cid-zetdm5md> <a class="button-link" href="/" data-astro-cid-zetdm5md>Retour a l'accueil</a> <a class="button-link button-link--secondary" href="/devis" data-astro-cid-zetdm5md>Acceder au devis</a> </div> </div> <aside class="not-found-hero__panel" data-astro-cid-zetdm5md> <span class="not-found-hero__code" data-astro-cid-zetdm5md>404</span> <p data-astro-cid-zetdm5md>Page introuvable</p> <small data-astro-cid-zetdm5md>Univers Glass reste accessible via l'accueil, le devis et l'intervention rapide.</small> </aside> </section> <section class="not-found-grid" data-astro-cid-zetdm5md> ${recoveryLinks.map((item) => renderTemplate`<article class="page-card not-found-card" data-astro-cid-zetdm5md> <h2 data-astro-cid-zetdm5md>${item.title}</h2> <p data-astro-cid-zetdm5md>${item.description}</p> <a${addAttribute(item.href, "href")} data-astro-cid-zetdm5md>Ouvrir la page</a> </article>`)} </section> </main>  ` })}`;
-}, "C:/Users/EMMA/ug/frontend/src/pages/404.astro", void 0);
+}, "C:/Users/EMMA/ug/ugfrontend/src/pages/404.astro", void 0);
 
-const $$file = "C:/Users/EMMA/ug/frontend/src/pages/404.astro";
+const $$file = "C:/Users/EMMA/ug/ugfrontend/src/pages/404.astro";
 const $$url = "/404";
 
 const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({

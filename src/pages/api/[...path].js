@@ -1,5 +1,3 @@
-import type { APIRoute } from "astro";
-
 export const prerender = false;
 
 const backendBaseUrl =
@@ -7,7 +5,7 @@ const backendBaseUrl =
   import.meta.env.PUBLIC_API_BASE_URL ??
   "http://127.0.0.1:8000/api";
 
-const proxyRequest: APIRoute = async ({ params, request, url }) => {
+const proxyRequest = async ({ request, url }) => {
   const proxyPath = url.pathname.replace(/^\/api\/?/, "");
   const normalizedBase = backendBaseUrl.endsWith("/")
     ? backendBaseUrl
@@ -19,14 +17,19 @@ const proxyRequest: APIRoute = async ({ params, request, url }) => {
   headers.delete("content-length");
   headers.delete("expect");
   headers.delete("connection");
+  headers.delete("origin");
+  headers.delete("referer");
+  headers.delete("cookie");
+  headers.delete("x-csrftoken");
 
   const response = await fetch(targetUrl, {
     method: request.method,
     headers,
-    body: request.method === "GET" || request.method === "HEAD"
-      ? undefined
-      : await request.text(),
-    redirect: "manual",
+    body:
+      request.method === "GET" || request.method === "HEAD"
+        ? undefined
+        : await request.text(),
+    redirect: "manual"
   });
 
   const responseHeaders = new Headers(response.headers);
@@ -35,7 +38,7 @@ const proxyRequest: APIRoute = async ({ params, request, url }) => {
   return new Response(response.body, {
     status: response.status,
     statusText: response.statusText,
-    headers: responseHeaders,
+    headers: responseHeaders
   });
 };
 

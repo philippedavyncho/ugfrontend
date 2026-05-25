@@ -1,6 +1,6 @@
 import { renderers } from './renderers.mjs';
-import { c as createExports, s as serverEntrypointModule } from './chunks/_@astrojs-ssr-adapter_CRWLNEok.mjs';
-import { manifest } from './manifest_CCWXush_.mjs';
+import { c as createExports, s as serverEntrypointModule } from './chunks/_@astrojs-ssr-adapter_DznJnqjp.mjs';
+import { manifest } from './manifest_CoXM85gQ.mjs';
 
 const serverIslandMap = new Map();;
 
@@ -17,7 +17,7 @@ const _page9 = () => import('./pages/index.astro.mjs');
 const pageMap = new Map([
     ["node_modules/astro/dist/assets/endpoint/node.js", _page0],
     ["src/pages/404.astro", _page1],
-    ["src/pages/api/[...path].ts", _page2],
+    ["src/pages/api/[...path].js", _page2],
     ["src/pages/contact.astro", _page3],
     ["src/pages/devis/merci.astro", _page4],
     ["src/pages/devis/index.astro", _page5],
@@ -36,8 +36,8 @@ const _manifest = Object.assign(manifest, {
 });
 const _args = {
     "mode": "standalone",
-    "client": "file:///C:/Users/EMMA/ug/frontend/dist/client/",
-    "server": "file:///C:/Users/EMMA/ug/frontend/dist/server/",
+    "client": "file:///C:/Users/EMMA/ug/ugfrontend/dist/client/",
+    "server": "file:///C:/Users/EMMA/ug/ugfrontend/dist/server/",
     "host": false,
     "port": 4321,
     "assets": "_astro",

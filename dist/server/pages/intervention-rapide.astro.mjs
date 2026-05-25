@@ -1,7 +1,7 @@
-import { e as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead, g as addAttribute, l as renderScript } from '../chunks/astro/server_CDgBX6fI.mjs';
+import { e as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead, g as addAttribute, l as renderScript } from '../chunks/astro/server_0AjLyGG5.mjs';
 import 'piccolore';
-import { $ as $$BaseLayout } from '../chunks/BaseLayout_CUeo3CAb.mjs';
-import { $ as $$MarketingIcon } from '../chunks/MarketingIcon_Cpct57MY.mjs';
+import { $ as $$BaseLayout } from '../chunks/BaseLayout_CmUaiSs0.mjs';
+import { $ as $$MarketingIcon } from '../chunks/MarketingIcon_TLWSRWAh.mjs';
 /* empty css                                   */
 /* empty css                                               */
 export { renderers } from '../renderers.mjs';
@@ -102,10 +102,10 @@ Une zone plus sure, une fermeture mieux geree et une reprise
 </p> </div> <div class="intervention-commitments-grid" data-astro-cid-pomhtseb> ${responseCommitments.map((item) => renderTemplate`<article class="intervention-commitment-card" data-astro-cid-pomhtseb> <span class="intervention-commitment-card__mark" aria-hidden="true" data-astro-cid-pomhtseb></span> <p data-astro-cid-pomhtseb>${item}</p> </article>`)} </div> </section> <section class="signature-section intervention-cta-section" data-astro-cid-pomhtseb> <div class="signature-copy" data-astro-cid-pomhtseb> <span class="section-kicker" data-astro-cid-pomhtseb>BESOIN D'AGIR VITE</span> <h2 data-astro-cid-pomhtseb>Declenchez votre demande d'intervention.</h2> <p data-astro-cid-pomhtseb>
 Donnez les dimensions, le type de vitrage et la nature du besoin pour
           lancer la prise en charge dans de bonnes conditions.
-</p> </div> <div class="intervention-cta-actions" data-astro-cid-pomhtseb> <a class="hero-button hero-button--red" href="/devis" data-astro-cid-pomhtseb> <span class="hero-button__icon" data-astro-cid-pomhtseb> ${renderComponent($$result2, "MarketingIcon", $$MarketingIcon, { "name": "quote", "data-astro-cid-pomhtseb": true })} </span> <span class="hero-button__copy" data-astro-cid-pomhtseb> <small data-astro-cid-pomhtseb>ACCEDER AU</small> <strong data-astro-cid-pomhtseb>FORMULAIRE DE DEVIS</strong> </span> </a> <a class="hero-button hero-button--blue" href="/" data-astro-cid-pomhtseb> <span class="hero-button__icon" data-astro-cid-pomhtseb> ${renderComponent($$result2, "MarketingIcon", $$MarketingIcon, { "name": "arrow", "data-astro-cid-pomhtseb": true })} </span> <span class="hero-button__copy" data-astro-cid-pomhtseb> <small data-astro-cid-pomhtseb>REVENIR A</small> <strong data-astro-cid-pomhtseb>L'ACCUEIL</strong> </span> </a> </div> </section> </main> ${renderScript($$result2, "C:/Users/EMMA/ug/frontend/src/pages/intervention-rapide.astro?astro&type=script&index=0&lang.ts")}  ` })}`;
-}, "C:/Users/EMMA/ug/frontend/src/pages/intervention-rapide.astro", void 0);
+</p> </div> <div class="intervention-cta-actions" data-astro-cid-pomhtseb> <a class="hero-button hero-button--red" href="/devis" data-astro-cid-pomhtseb> <span class="hero-button__icon" data-astro-cid-pomhtseb> ${renderComponent($$result2, "MarketingIcon", $$MarketingIcon, { "name": "quote", "data-astro-cid-pomhtseb": true })} </span> <span class="hero-button__copy" data-astro-cid-pomhtseb> <small data-astro-cid-pomhtseb>ACCEDER AU</small> <strong data-astro-cid-pomhtseb>FORMULAIRE DE DEVIS</strong> </span> </a> <a class="hero-button hero-button--blue" href="/" data-astro-cid-pomhtseb> <span class="hero-button__icon" data-astro-cid-pomhtseb> ${renderComponent($$result2, "MarketingIcon", $$MarketingIcon, { "name": "arrow", "data-astro-cid-pomhtseb": true })} </span> <span class="hero-button__copy" data-astro-cid-pomhtseb> <small data-astro-cid-pomhtseb>REVENIR A</small> <strong data-astro-cid-pomhtseb>L'ACCUEIL</strong> </span> </a> </div> </section> </main> ${renderScript($$result2, "C:/Users/EMMA/ug/ugfrontend/src/pages/intervention-rapide.astro?astro&type=script&index=0&lang.ts")}  ` })}`;
+}, "C:/Users/EMMA/ug/ugfrontend/src/pages/intervention-rapide.astro", void 0);
 
-const $$file = "C:/Users/EMMA/ug/frontend/src/pages/intervention-rapide.astro";
+const $$file = "C:/Users/EMMA/ug/ugfrontend/src/pages/intervention-rapide.astro";
 const $$url = "/intervention-rapide";
 
 const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
