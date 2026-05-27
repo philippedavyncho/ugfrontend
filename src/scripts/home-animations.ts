@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const desktopPointer = window.matchMedia("(hover: hover) and (pointer: fine)");
 
 function animateActiveSlide(sliderElement: HTMLElement) {
   const slides = sliderElement.querySelectorAll<HTMLElement>(".showcase-slide");
@@ -82,8 +83,8 @@ function initSlider(root: HTMLElement) {
     rewindSpeed: 900,
     autoplay: !prefersReducedMotion.matches,
     interval: 4800,
-    pauseOnHover: true,
-    pauseOnFocus: true,
+    pauseOnHover: !desktopPointer.matches,
+    pauseOnFocus: !desktopPointer.matches,
     arrows: true,
     pagination: false,
     perPage: 1,
