@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import MarketingIcon from "../components/ui/MarketingIcon.astro";
+import BrandLockup from "../components/ui/BrandLockup.astro";
 import "../styles/univers-glass-pages.css";
 
 const emergencyHighlights = [
@@ -103,22 +104,7 @@ const responseCommitments = [
         <div class="hero-copy">
           <div class="hero-copy__bg" aria-hidden="true"></div>
 
-          <a class="brand-lockup" href="/" aria-label="Univers Glass">
-            <svg viewBox="0 0 54 74" aria-hidden="true">
-              <path
-                d="M7 7.5 28 1v65L7 72.5Z"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="5"
-              ></path>
-              <path d="M34 7.5 47 4v64l-13 3.5Z" fill="currentColor"></path>
-            </svg>
-
-            <span class="brand-copy">
-              <strong>UNIVERS GLASS</strong>
-              <span>LA TRANSPARENCE AU SERVICE DE VOS PROJETS</span>
-            </span>
-          </a>
+          <BrandLockup size="hero" />
 
           <h1 class="hero-title">
             <span>INTERVENTION</span>

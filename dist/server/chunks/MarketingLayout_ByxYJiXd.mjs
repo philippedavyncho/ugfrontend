@@ -1,10 +1,10 @@
 import { e as createComponent, m as maybeRenderHead, r as renderTemplate, k as renderComponent, h as createAstro, n as renderSlot } from './astro/server_0AjLyGG5.mjs';
 import 'piccolore';
-import { $ as $$BaseLayout } from './BaseLayout_CmUaiSs0.mjs';
+import { $ as $$BaseLayout } from './BaseLayout_Bv64Bh11.mjs';
 import 'clsx';
 
 const $$Header = createComponent(($$result, $$props, $$slots) => {
-  return renderTemplate`${maybeRenderHead()}<header class="site-header"> <div class="site-header__inner"> <a class="site-brand" href="/" aria-label="Univers Glass"> <span class="site-brand__mark" aria-hidden="true"> <span></span> <span></span> </span> <span class="site-brand__copy"> <strong>Univers Glass</strong> <span>Vitrerie professionnelle</span> </span> </a> <nav class="site-nav" aria-label="Navigation principale"> <a href="/">Accueil</a> <a href="/intervention-rapide">Intervention rapide</a> <a href="/devis">Devis</a> </nav> <div class="site-header__actions"> <a class="site-header__quick" href="/intervention-rapide">Urgence</a> <a class="site-cta" href="/devis">Demander un devis</a> </div> </div> </header>`;
+  return renderTemplate`${maybeRenderHead()}<header class="site-header"> <div class="site-header__inner"> <a class="site-brand" href="/" aria-label="Univers Glass"> <img class="site-brand__logo" src="/goodlogo.png" alt="" aria-hidden="true" width="682" height="366" loading="eager" decoding="async"> </a> <nav class="site-nav" aria-label="Navigation principale"> <a href="/">Accueil</a> <a href="/intervention-rapide">Intervention rapide</a> <a href="/devis">Devis</a> </nav> <div class="site-header__actions"> <a class="site-header__quick" href="/intervention-rapide">Urgence</a> <a class="site-cta" href="/devis">Demander un devis</a> </div> </div> </header>`;
 }, "C:/Users/EMMA/ug/ugfrontend/src/components/layout/Header.astro", void 0);
 
 const $$Footer = createComponent(($$result, $$props, $$slots) => {

@@ -1,5 +1,6 @@
 ---
 import MarketingLayout from "../../layouts/MarketingLayout.astro";
+import BrandLockup from "../../components/ui/BrandLockup.astro";
 
 const { slug = "service" } = Astro.params;
 
@@ -38,6 +39,7 @@ const serviceBenefits = [
   <main class="page-shell service-page">
     <section class="service-hero">
       <div class="service-hero__copy">
+        <BrandLockup />
         <p class="eyebrow">Service vitrerie</p>
         <h1>{serviceName || "Service"} avec une execution propre et serieuse.</h1>
         <p>

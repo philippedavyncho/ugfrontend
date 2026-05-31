@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import MarketingIcon from "../../components/ui/MarketingIcon.astro";
+import BrandLockup from "../../components/ui/BrandLockup.astro";
 import "../../styles/univers-glass-pages.css";
 
 const apiBaseUrl = "/api";
@@ -111,22 +112,7 @@ const quoteTrustItems = [
         <div class="hero-copy">
           <div class="hero-copy__bg" aria-hidden="true"></div>
 
-          <a class="brand-lockup" href="/" aria-label="Univers Glass">
-            <svg viewBox="0 0 54 74" aria-hidden="true">
-              <path
-                d="M7 7.5 28 1v65L7 72.5Z"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="5"
-              ></path>
-              <path d="M34 7.5 47 4v64l-13 3.5Z" fill="currentColor"></path>
-            </svg>
-
-            <span class="brand-copy">
-              <strong>UNIVERS GLASS</strong>
-              <span>LA TRANSPARENCE AU SERVICE DE VOS PROJETS</span>
-            </span>
-          </a>
+          <BrandLockup size="hero" />
 
           <h1 class="hero-title">
             <span>DEVIS</span>
@@ -317,6 +303,28 @@ const quoteTrustItems = [
                 </select>
               </label>
 
+              <div class="contact-fields">
+                <label class="field">
+                  <span>Nom</span>
+                  <input
+                    name="nom"
+                    type="text"
+                    autocomplete="name"
+                    required
+                  />
+                </label>
+
+                <label class="field">
+                  <span>Numero de telephone</span>
+                  <input
+                    name="telephone"
+                    type="tel"
+                    inputmode="tel"
+                    autocomplete="tel"
+                    required
+                  />
+                </label>
+              </div>
             </div>
 
             <fieldset class="options" data-role="work-types-group" disabled>
@@ -666,6 +674,8 @@ const quoteTrustItems = [
         }
 
         const payload = {
+          nom: formData.get("nom"),
+          telephone: formData.get("telephone"),
           width: formData.get("width"),
           height: formData.get("height"),
           glass_type: Number(formData.get("glass_type")),
@@ -874,6 +884,13 @@ const quoteTrustItems = [
       display: grid;
       gap: 0.5rem;
       min-width: 0;
+    }
+
+    .contact-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.95rem;
+      grid-column: 1 / -1;
     }
 
     .field--wide {
@@ -1113,6 +1130,10 @@ const quoteTrustItems = [
       .form-grid,
       .result-summary,
       .quote-cta-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-fields {
         grid-template-columns: 1fr;
       }
 
